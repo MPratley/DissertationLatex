@@ -1,0 +1,41 @@
+%thesis.tex 
+%Model LaTeX file for Ph.D. thesis at the 
+%School of Mathematics, University of Edinburgh
+
+\documentclass[10pt,twoside,openright]{report} 
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\title{An investigation of the error introduced into a brain simulation through uploading the mind (need a shorter title)}
+\author{Marcus Pratley}
+\date{2020}
+
+\usepackage[ungrad, hyperref]{edmaths}
+\usepackage{csquotes}
+\usepackage[style=apa]{biblatex} 
+\addbibresource{refs.bib}
+
+\begin{document}
+
+\maketitle
+
+\declaration
+
+\dedication{To my friends, my family \\ and the moon, \\ with whom I've shared many secrets, none of which have yet been published. }
+
+\begin{abstract}
+It has often been conjectured by lesser man of shorter stature than I, that $x$ is true. I, as an enlightened and thoughtful being, know better than this. It is in fact the case that $y$ is true, and any who assert otherwise will be trashed by all forthright and well-thinking men.
+\end{abstract}
+
+\tableofcontents
+
+\include{Chapter1Introduction}
+\include{Chapter2AimsAndObjectives}
+\include{Chapter3BackgroundResearch}
+\include{Chapter4Development}
+\include{Chapter5Results}
+\include{Chapter6Conclusion}
+
+\printbibliography[heading=bibintoc]
+
+\end{document}

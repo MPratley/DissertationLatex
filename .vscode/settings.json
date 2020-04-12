@@ -1,4 +1,23 @@
 {
     "editor.wordWrap": "bounded",
-    "latex-workshop.view.pdf.backgroundColor": "#fff4d1"
+    "latex-workshop.view.pdf.backgroundColor": "#fff4d1",
+    "workbench.colorCustomizations": {
+        "activityBar.activeBackground": "#45132b",
+        "activityBar.activeBorder": "#3e641c",
+        "activityBar.background": "#45132b",
+        "activityBar.foreground": "#e7e7e7",
+        "activityBar.inactiveForeground": "#e7e7e799",
+        "activityBarBadge.background": "#3e641c",
+        "activityBarBadge.foreground": "#e7e7e7",
+        "statusBar.background": "#1d0812",
+        "statusBar.border": "#1d0812",
+        "statusBar.foreground": "#e7e7e7",
+        "statusBarItem.hoverBackground": "#45132b",
+        "titleBar.activeBackground": "#1d0812",
+        "titleBar.activeForeground": "#e7e7e7",
+        "titleBar.border": "#1d0812",
+        "titleBar.inactiveBackground": "#1d081299",
+        "titleBar.inactiveForeground": "#e7e7e799"
+    },
+    "peacock.color": "#1d0812"
 }

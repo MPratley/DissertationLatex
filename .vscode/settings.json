@@ -1,3 +1,4 @@
 {
-    "editor.wordWrap": "bounded"
+    "editor.wordWrap": "bounded",
+    "latex-workshop.view.pdf.backgroundColor": "#fff4d1"
 }

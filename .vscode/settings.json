@@ -20,5 +20,16 @@
         "titleBar.inactiveForeground": "#e7e7e799"
     },
     "peacock.color": "#1d0812",
-    "latex-workshop.latex.outDir": "%DIR%/build/"
+    "files.exclude": {
+        "**/*.aux": true,
+        "**/*.bcf": true,
+        "**/*.fdb_latexmk": true,
+        "**/*.fls": true,
+        "**/*.gz": true,
+        "**/*.log": true,
+        "**/*.out": true,
+        "**/*.tex~": true,
+        "**/*.toc": true,
+        "**/*.xml": true
+    }
 }

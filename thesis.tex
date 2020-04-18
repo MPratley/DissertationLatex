@@ -1,15 +1,20 @@
 \documentclass[10pt,twoside,openright]{report} 
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
+% \usepackage{verbatim}
+% \newcommand\wordcount{\verbatiminput{words.sum}}
 
 \title{Investigating The Effect of Measurement Error in Brain Simulation}
 \author{Marcus Pratley}
 \date{2020}
 
+% % Run texcount on tex-file and write results to a sum-file
+% \immediate\write18{texcount -1 -sum -merge Chapter*.tex -out=words.sum}
+
 \usepackage[ungrad, hyperref]{edmaths}
 \usepackage{csquotes}
 \usepackage[style=apa]{biblatex} 
-\addbibresource{refs.bib}
+\addbibresource{refsv2.bib}
 
 \usepackage[default,light,bold]{sourceserifpro}
 \usepackage[T1]{fontenc}
@@ -18,31 +23,65 @@
 \usepackage{multirow}
 \usepackage{amsmath, amsthm, amssymb, amsfonts}
 
+% \usepackage{tocloft}
+\usepackage[small]{caption}
+
+\captionsetup[figure]{font=it} 
+
+% some auxiliary lengths for aligning the captions
+\newlength\mylena
+\newlength\mylenb 
+
+% syntax: \MyCaption{First numbered caption}{Second unnumbered caption}
+\newcommand\DoubleCaption[2]{%
+  \captionsetup{belowskip=-\baselineskip}
+  \settowidth\mylena{\small\itshape\figurename~\thefigure. #1.}
+  \settowidth\mylenb{\small\itshape #2.}
+  \caption{#1} 
+  \caption*{\hspace*{\dimexpr\mylenb-\mylena\relax} (#2)}
+  \setlength\belowcaptionskip{\baselineskip}
+}
+
+% % settings for the list of figures
+% \renewcommand\cftfigpresnum{Figure }
+% \renewcommand\cftfigaftersnum{.}
+% \newlength\mylend
+% \settowidth\mylend{\cftfigpresnum\cftfigaftersnum}
+% \addtolength\cftfignumwidth{\mylend}
+
 % \usepackage[bitstream-charter]{mathdesign}
 % \usepackage[T1]{fontenc}
 
 \begin{document}
 
+\csname @openrightfalse\endcsname
+
 \maketitle
 
 \declaration
 
-\dedication{With thanks to Frances Hutchins and Prof. Marcus Kaiser, who have both been a great help throughout the somewhat fraught process of creating this dissertation. \\ Extra thanks also to my family and parents in particular, for all the love and support over the course of this degree.}
+\dedication{With thanks to Frances Hutchins and Prof. Marcus Kaiser, who have both been a great help throughout the somewhat fraught process of creating this dissertation. \\ \vspace{1ex} Extra thanks also to my family, and parents in particular, for all their love and support over the course of my degree. }
 
 \begin{abstract}
-    It has often been conjectured by lesser man of shorter stature than I, that
+    THIS IS A FAKE ABSTRACT WRITE A NEW ONE. It has often been conjectured by lesser man of shorter stature than I, that
     $x$ is true. I, as an enlightened and thoughtful being, know better than
     this. It is in fact the case that $y$ is true, and any who assert otherwise
     will be trashed by all forthright and well-thinking men.
 \end{abstract}
 
+\def\table{\def\figurename{Table}\figure}
+\let\endtable\endfigure 
+\renewcommand\listfigurename{List of Figures and Tables}
+
 \tableofcontents
+\listoffigures
+\csname @openrighttrue\endcsname
 
 \include{Chapter1Introduction}
-\include{Chapter2AimsAndObjectives}
-\include{Chapter3BackgroundResearch}
-\include{Chapter4Development}
-\include{Chapter5Results}
+\include{Chapter2BackgroundResearch}
+\include{Chapter3Development}
+\include{Chapter4Results}
+\include{Chapter5Evaluation}
 \include{Chapter6Conclusion}
 
 \printbibliography[heading=bibintoc]

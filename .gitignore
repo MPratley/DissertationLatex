@@ -13,3 +13,4 @@
 *.tex~
 
 build/
+thesis.lof

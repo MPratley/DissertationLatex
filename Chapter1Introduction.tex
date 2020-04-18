@@ -24,10 +24,59 @@ correctly capture the distances between neurons, or that changes in the network
 will occur while measurements are taken. It is therefore unclear what impact
 this measurement error would have on a simulation of the human brain.
 
-In this dissertation I hope to answer... 
+\section{Motivation}
+
+In this dissertation I hope to answer...
+
+\section{Aims and Objectives}
+
+My project aims to demonstrate the effect of measurement error on brain
+simulation by developing tooling and adapting the VERTEX simulator. The outcome
+of this project will be to improve the tooling available to run parallel
+simulations which diverge at chosen points throughout the runtime of a brain
+simulation, with new parameters at the point of divergence. These parameters
+will then be modified to model the effect of measurement error when “uploading”
+a brain into a simulation.
 
 \begin{itemize}
-    \item One gang money
-    \item Two gang money
-    \item Three gang money
+    \item THESE ARE MY ORIGINAL AIMS AND OBJECTIVES AND NEED TO CHANGE
+    \item \textbf{Analyse and compare three published neural simulation packages.}
+          Developing an understanding of simulation packages and the models that
+          they implement will help me inform my design decisions for my own
+          implementation of this feature. This objective will have been
+          completed when I have summarised and understood the aims and features
+          of three existing packages. Two of these are referenced in my
+          Background Research.
+    \item \textbf{Analyse and understand the source code and tooling of the
+              VERTEX simulator.} It is necessary that before starting
+          development, I understand the software design rationale and
+          patterns of the VERTEX simulator. In order to achieve this I will
+          complete the VERTEX tutorials, on the project website. (Tomsett,
+          n.d.). A prerequisite of this is learning the syntax and design
+          patterns of MATLAB. This objective will be met when I am working
+          on the implementation stage of the project.
+    \item \textbf{Identify the requirements of a routine within VERTEX that is
+              capable of saving a snapshot of a running simulation.} I will need
+          to gather data relating to the functionality and design of a
+          simulation snapshot saving system. This will include the API
+          presented to the user of the software, required data structures to
+          store information, and choosing functionality which forms the
+          minimal viable product. To achieve this, I must have collected
+          enough research to make conclusive design and functionality
+          decisions.
+    \item \textbf{Identify the parameters in a brain simulation that can be
+              modified during the simulation to emulate the measurement error of
+              uploading the human brain.} Many of the parameters required in the
+          creation of a simulation, such as the number of layers or the
+          positions and links between neurons could be modified during a
+          simulation using the tooling this project aims to develop. This
+          objective will be complete when I have identified these
+          parameters, and justified why they have been chosen over others.
+    \item \textbf{Analyse the performance of simulations that diverge with
+              different measurement errors from a starting simulation.} This
+          final objective will assess whether the software designed and
+          developed during the project can correctly demonstrate the effect
+          of measurement error on brain simulation. 
 \end{itemize}
+
+\section{Document Structure}

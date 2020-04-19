@@ -30,7 +30,10 @@
         "**/*.out": true,
         "**/*.tex~": true,
         "**/*.toc": true,
-        "**/*.xml": true
+        "**/*.xml": true,
+        "**/*.bbl": true,
+        "**/*.blg": true,
+        "**/*.lof": true
     },
     "latex-workshop.intellisense.file.exclude": [
         "**/*.aux",

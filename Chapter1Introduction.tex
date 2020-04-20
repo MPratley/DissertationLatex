@@ -14,7 +14,7 @@ humanity would be made immortal. However, there are a number of constraints
 technologically that must be reckoned with before this could even be attempted
 \parencite{bostrom_whole_2008}, alongside the moral quandaries that are ever
 present when discussing the evolution and modification of what it means to be
-human. 
+human.
 
 When discussing brain emulation, we envisage the “uploading” of
 consciousness, which in basic terms is the measurement of electrical activity
@@ -24,7 +24,7 @@ measurement process would introduce error in numerous ways; It is perhaps
 possible that the resolution of the scanning equipment is not large enough to
 correctly capture the distances between neurons, or that changes in the network
 will occur while measurements are taken. It is therefore unclear what impact
-this measurement error would have on a simulation of the human brain. 
+this measurement error would have on a simulation of the human brain.
 
 \section{Motivation}
 
@@ -36,13 +36,13 @@ current imaging techniques.
 The primary outcome of this project will be to provide Python tooling that is
 capable of running simulations in a parallel manner across multiple threads,
 that can be modified during runtime to model the effect of measurement error
-when“uploading”a brain into a simulation. 
+when“uploading”a brain into a simulation.
 
 \section{Aims and Objectives}
 
 This project was originally planned to be built on top of the VERTEX simulator.
 However, once my research began I decided that I would instead shift more
-towards building the simulation tooling myself as a learning opportunity 
+towards building the simulation tooling myself as a learning opportunity
 
 \begin{itemize}
     \item \textbf{Analyse and compare three published neural simulation packages.}
@@ -52,38 +52,40 @@ towards building the simulation tooling myself as a learning opportunity
           completed when I have summarised and understood the aims and features
           of three existing packages.
     \item \textbf{Identify the experiments that should be performed to determine
-    the relation between measurement error in data from imaging a brain, and the
-    performance of a neural simulation of such data.} In order to prove that
-    that measurement error has an effect on predicting future brain activity, I
-    will define experiments that can be performed within the limits of this
-    project. Each experiment must contribute either to the argument that
-    measurement error has a major negative impact on the accuracy of a neural
-    simulation, or that introducing plasticity into the simulation minimises
-    this effect over time.
-    \item \textbf{Identify the requirements and features that my simulation tooling should implement to be capable of performing the project experiments.}
-    
-    % \item \textbf{Identify the requirements of a routine within VERTEX that is
-    %           capable of saving a snapshot of a running simulation.} I will need
-    %       to gather data relating to the functionality and design of a
-    %       simulation snapshot saving system. This will include the API
-    %       presented to the user of the software, required data structures to
-    %       store information, and choosing functionality which forms the
-    %       minimal viable product. To achieve this, I must have collected
-    %       enough research to make conclusive design and functionality
-    %       decisions.
+              the relation between measurement error in data from imaging a
+              brain, and the performance of a neural simulation of such data.}
+              In order to prove that that measurement error has an effect on
+              predicting future brain activity, I will define experiments that
+              can be performed within the limits of this project. Each
+              experiment must contribute either to the argument that measurement
+              error has a major negative impact on the accuracy of a neural
+              simulation, or that introducing plasticity into the simulation
+              minimises this effect over time.
+    \item \textbf{Identify the requirements and features that the simulation
+              tooling should implement to be capable of performing the project
+              experiments.} Given the experiments that are defined in order to
+              meet the previous objective, a set of requirements for the
+              simulation software can be identified. This will include the
+              Python API presented to the user of the software, required data
+              structures to store information, and choosing functionality which
+              forms the minimal viable product. To achieve this, I must have
+              collected enough research to make conclusive design and
+              functionality decisions.
     \item \textbf{Identify the parameters in a brain simulation that can be
               modified during the simulation to emulate the measurement error of
               uploading the human brain.} Many of the parameters required in the
-          creation of a simulation, such as the number of layers or the
-          positions and links between neurons could be modified during a
-          simulation using the tooling this project aims to develop. This
-          objective will be complete when I have identified these
-          parameters, and justified why they have been chosen over others.
+              creation of a simulation, such as the number of layers or the
+              positions and links between neurons could be modified during a
+              simulation using the tooling this project aims to develop. This
+              objective will be complete when I have identified these
+              parameters, and justified why they have been chosen over others.
     \item \textbf{Analyse the performance of simulations that diverge with
               different measurement errors from a starting simulation.} This
-          final objective will assess whether the software designed and
-          developed during the project can correctly demonstrate the effect
-          of measurement error on brain simulation. 
+              final objective will assess whether the software designed and
+              developed during the course of the project can correctly
+              demonstrate the effect of measurement error on brain simulation.
+              This objective will be met once the experiments are shown to have
+              provided conclusive results.
 \end{itemize}
 
 % \section{Experiments and Hypotheses}
@@ -105,12 +107,12 @@ discussed, as will the simulation parameters.
 \subsection*{Experiments and Results}
 The rudimentary correctness of the Python simulation is verified here, and each
 of the experiments that form the basis of the arguments made in this
-dissertation are expanded on and their results are explained. 
+dissertation are expanded on and their results are explained.
 
 \subsection*{Analysis and Evaluation}
 An analysis and evaluation will review the results in the previous chapter and
 show how the results reflect on the overall project aims. The results of all the experiments are reviewed holistically and compared with
-expected findings. 
+expected findings.
 \subsection*{Conclusion}
 A summary of the project, and whether the aim and objectives have been met. The
 overall success of the project is evaluated and future work that could be

@@ -1,17 +1,45 @@
 \section{Imaging and Image Processing}
-
-\begin{itemize}
-    \item Prediction of future brain activity through simulation requires an accurate and detailed connectome of a brain, with synapses and neurons correctly located in space.\autocite{bostrom_whole_2008}
-    \item The accuracy of such a model depends on the resolution of the imaging method used to create it. The error resulting from such a imaging method is the \textbf{measurement error}. 
-    \item Depending on imaging procedure, brain matter may shift in composition during the course of the scan, which is the cause of \textbf{measurement drift}, itself a form of measurement error.
-\end{itemize}
+At some point between a biological brain processing the life of an organism, and
+a simulation of a brain attempting to continue computation, the brain must be
+"copied" over. This can be done through several different imaging techniques.
 
 \subsection{Current Methods of Scanning the brain}
 
+\subsubsection*{MRI Scanning}
+
+- Common procedure
+- Enough detail for general structure, but provides little to no insight to fine
+details such as placement of dendritic!Typo?! spines or the exact size or placement of
+synapses between neurons.
+- As the patient is typically alive during a scan, there will be significant
+measurement drift as the current is still moving around the brain as normal.
+
+\subsubsection*{XRay}
+
+- Not naturally useful, have to inject a substrate into the brain for this to
+create an image of any meaningful contrast ?!?!CITE
+
+\subsubsection*{Electron Microscope Scanning}
+
+- Very precise
+- Can take a very long time
+- Need well "frozen" slices of the brain for this to be of any use or you'll
+have major measurement drift as the brain decays.
+
+\subsubsection*{New Methods}
+
+- Some of the more experimental stuff here.
+
 \subsection[Error induced through noise]{Examination of Error induced through the imaging process}
+
+Prediction of future brain activity through simulation requires an accurate and
+detailed connectome of a brain, with synapses and neurons correctly located in
+space.\autocite{bostrom_whole_2008} The accuracy of such a model depends on the
+resolution of the imaging method used to create it. The error resulting from
+such a imaging method is the measurement error. Depending on imaging procedure, brain matter may shift in composition during the course of the scan, which is the cause of measurement drift, itself a form of measurement error.
 
 \input{figures/tables/comparisonOfImagingMethods.tex}
 
-\subsection[Error induced through low resolution]{Effect of Low Resolution} 
+\subsubsection[Error induced through low resolution]{Effect of Low Resolution} 
 (this is easy just print something out
 and scan it badly. Explain what kind of error in incurred.)

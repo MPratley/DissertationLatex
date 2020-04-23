@@ -1,3 +1,26 @@
 \chapter{Planning and Development}
 
 \section{Simulation Requirements}
+
+\section{LIF Maths}
+
+TEMP:
+\begin{figure*}[h]
+    \centering
+    \begin{equation}\label{eq:LIF_TC}
+        T_C
+    \end{equation}
+    \begin{equation}\label{eq:LIF_RC}
+        \frac{d V}{d t} = -\frac{V}{\tau_L} + \frac{I(t)}{C},
+    \end{equation}
+    \begin{equation}\label{eq:integ_LIF_RC_VL}
+        V(t)= \frac{1}{C} \int_{0}^{t} e^{-\frac{(t-s)}{\tau_L}} I(s) ds
+    \end{equation}
+    $C$ is the membrane capacity, $g_L$ is the leak conductance and $V_L$ is the leak reversal potential.
+    % \caption{Formulae for a Leaky Integrate and Fire Neuron (pre-threshold)}
+    \label{LIFequation}
+\end{figure*}
+
+\section{Modelling Neurons in Python}
+
+\section{Spike refractory periods}

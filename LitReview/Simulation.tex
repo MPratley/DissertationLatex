@@ -1,57 +1,47 @@
+% TODO: write a section on rate vs event models. Brian has a good page on this.
+% https://brian2.readthedocs.io/en/stable/advanced/how_brian_works.html#clock-driven-versus-event-driven
+
 \section{Computational models for brain simulation}
 
-The coupled differential equations that define a compartmental model of a
-neuron can be solved numerically, and can therefore be programmed in a
-high-level programming language relatively simply. However, while
-programmatically solving differential equations is straightforward in principle,
-the computational power and provision of memory required makes simulating large
-networks of neurons difficult to do in practice \autocite{trappenberg_fundamentals_2009}.
-Existing simulation packages provide a foundation from which biological
-experiments can be conducted, and aim to abstract away purely computational
-concerns. Some of these packages that have different approaches to solving this are described in more detail below. 
+The coupled differential equations that define a compartmental model of a neuron
+can be solved numerically, and can therefore be programmed in a high-level
+programming language relatively simply. However, while programmatically solving
+differential equations is straightforward in principle, the computational power
+and provision of memory required makes simulating large networks of neurons
+difficult to do in practice \autocite{trappenberg_fundamentals_2009}. Existing
+simulation packages provide a foundation from which biological experiments can
+be conducted, and aim to abstract away purely computational concerns. Some of
+these packages that have different approaches to solving this are described in
+more detail below.
 
 \subsection{Available neural simulation and modelling software packages}
-
-\subsubsection{NEURON}
-\begin{quote}
-    NEURON is a simulation environment for developing and exercising models of
-    neurons and networks of neurons. It is particularly well-suited to problems
-    where cable properties of cells play an important role, possibly including
-    extracellular potential close to the membrane), and where cell membrane
-    properties are complex, involving many ion-specific channels, ion
-    accumulation, and second messengers. It evolved from a long collaboration
-    between Michael Hines and John W. Moore at the Department of Neurobiology,
-    Duke University. Their express goal was to create a tool designed
-    specifically for solving the equations that describe nerve cells.
-\end{quote}
-based on NEURON:
-\autocite{hagen_lfpy_2019} \autocite{hagen_hybrid_2016}
 
 \subsubsection{VERTEX}
 The Virtual Electrode Recording Tool for EXtracellular potentials (VERTEX) is a
 simulator for large networks of neurons written in the MATLAB programming
 language. More specifically, it aims to reproduce the measurements that are
-produced by in-vitro recordings from patients fitted with multi-electrode
+produced by in-vivo recordings from patients fitted with multi-electrode
 arrays. This is achieved by locating each neuron in 3D space, placing virtual
 electrodes in the same space, and calculating the change in potential at each
 stage of the simulation at each electrode. The neuron model used in VERTEX is
 also more advanced than similar models described in this section in that the
-local field potential (LFP) of the neuron is spatially realistic \autocite{tomsett_virtual_2015}. A major
-advantage of this design is that it becomes easy to map between general neuronal
-activity in a simulated model and brain activity of, say, a real-world patient
-in a medical trial. 
+local field potential (LFP) of the neuron is spatially realistic
+\autocite{tomsett_virtual_2015}. A major advantage of this design is that it
+becomes easy to map between general neuronal activity in a simulated model and
+brain activity of, say, a real-world patient in a medical trial.
 
 A 2019 update to VERTEX introduced a range of simulation features, the most
 notable of which for the purposes of this project being Spike Time Dependant
 Plasticity (STDP), which dynamically adapts the weighting of synapses based on
-the observed causality of pre-synaptic spikes on post-synaptic spikes \autocite{thornton_virtual_2019}. Details
-on how this may be implemented and used are covered further in Chapter 3.
+the observed causality of pre-synaptic spikes on post-synaptic spikes
+\autocite{thornton_virtual_2019}. Details on how this may be implemented and
+used are covered further in Chapter 3.
 
 \begin{figure}[h]
     \centering
     \includegraphics{figures/graphs/coresVERTEX.png}
-    \DoubleCaption{Impact of parralel computation on simulation performance in VERTEX}
-    {\cite{tomsett_virtual_2015}}
+    \DoubleCaption{Impact of parralel comIn chapter 3 I will putation on
+        simulation performance in VERTEX} {\cite{tomsett_virtual_2015}}
     \label{VERTEXparallel}
 \end{figure}
 \vspace{1ex}
@@ -62,16 +52,54 @@ that, with a sufficiently large model, doubling the number of available workers
 in the pool nearly halves the time taken to simulate, as shown in figure
 \ref{VERTEXparallel} above.
 
-\subsubsection{BRIAN}
-NEED A REFERENCE FOR BRIAN
-\autocite{stimberg_brian_2019}
+\subsubsection{NEURON}
+
+NEURON describes itself as ``a tool designed specifically for solving the
+equations that describe nerve cells'' and provides a holistic environment for
+developing and simulating models of individual neurons and neural networks. It
+is particularly adept at modelling complex chemistry in neuron models, and can
+be used when the field potential of a location very close to a neuron needs to
+be accurately modelled \autocite{carnevale_neuron_2006}. This does, however,
+mean that simulating large networks is computationally expensive, and more
+complex models require correctly tuned parameters for each new feature which
+increases the time setting up simulations.
+
+Further simulation toolkits may be built atop NEURON, and one such example is
+LFPy. LFPy is a Python tool using NEURON that aims to accurately provide
+extracellular potential readings for single neuron models
+\autocite{hagen_hybrid_2016}. It can also provide extracellular potential
+readings for networks in the most recent versions \autocite{hagen_lfpy_2019},
+however the caveat that NEURON based networks are limited in size by available
+resources still holds.
+
+\subsubsection{Brian}
+
+Brain is another simulator for spiking neural networks, distributed as a python
+library. Brian offers a unique programming interface whereby the differential
+equations that define a Neuron can be written in plaintext and are interpreted
+at runtime. Provided the equation written can be interpreted, this approach
+makes turning mathematical models into code extremely simple, and is ideal for
+quickly testing variations of a model \autocite{stimberg_brian_2019}. This is,
+however, less useful for more complex relationships between neurons where the
+plain-text mathematical syntax develops its own API on top of the Python API.
+Fortunately users of the library may provide native python functions to define
+the behaviour of their neurons if desired \autocite{noauthor_functions_2020}.
+The complexity of actual neurons in a Brian simulation is as complex as a
+programmer intends it to be: Neurons can be placed in physical space if desired,
+but this is optional. The time taken to simulate a network is largely dependant
+on the time complexity of the user-defined equations that define the neurons.
 
 \subsection{Similarities in existing software packages}
 
-Each of the mentioned software packages mentioned above is capable of doing XYZ,
-but each has a distinct end goal. The VERTEX authors state that "QUOTE", while
-BRIAN is designed less for a specific research purpose and more to be a
-generally adoptable library for other developers and researchers to use in their
-own projects. The LFPy authors have taken a combined approach, with thorough
-documentation of the project, but the tool is still understandably designed for
-the research purposes of its authors. 
+Each of the software packages described above is capable of doing simulating a
+network of Neurons, but each has a distinct set of goals. Some, like Brian, are
+intended as tools to study the spiking patterns and features of generic neural
+networks, while VERTEX provides a more specialised tool that is optimised for
+measuring the observed potential changes in a similar manner to capturing
+experimental data. These differences are also seen in the API available to
+developers
+and the distribution methods that each package uses. VERTEX requires that the
+user defines the parameters for Neuron grouping and placement while abstracting
+away the exact definition of the Neuron behaviour, while NEURON and Brian are
+very much focussed on the Neuron definition, and space placement and recording
+mechanisms are functions largely left to the programmer to define.

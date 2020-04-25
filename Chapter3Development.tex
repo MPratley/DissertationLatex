@@ -1,8 +1,25 @@
-\chapter{Planning and Development}
+\chapter{Design, Development and Methodology}
+
+In order to better understand the fundamentals of computational neuroscience, I
+am taking a "from scratch" approach to building this project. While this
+increases the time required to run simulation experiments, this approach allows
+me to build confidence in my understanding of the maths and models that are
+commonly used in the wider computational neuroscience community.
 
 \section{Simulation Requirements}
 
-\section{LIF Maths}
+\begin{itemize}
+    \item \textbf{Spiking neural network is the target emulation layer}
+    Justification should cite imaging requirements and state that this is an
+    appropriate level of abstraction to answer the question of this
+    dissertation. Refer to the table of emulation layers in lit review.
+    \item \textbf{Requirement 2.} Reasoning for requirement two.
+\end{itemize}
+
+\section{Modelling mathematics}
+"In order to program this thing I must first enumerate the differential equations
+that describe the functioning of Neurons in this spiking neural network."
+\subsection{Leaky Integrate and Fire}
 
 TEMP:
 \begin{figure*}[h]
@@ -21,6 +38,38 @@ TEMP:
     \label{LIFequation}
 \end{figure*}
 
-\section{Modelling Neurons in Python}
+\subsection{Spike refractory periods}
 
-\section{Spike refractory periods}
+\subsection{STDP}
+
+\section{Transferring models to Python}
+
+In order to flexibly mix
+object oriented and function programming paradigms, I've chosen to develop these
+models in the Python programming language. Python also has a healthy and active
+ecosystem of libraries and development practices for scientific and statistical research.
+
+Of particular note are the scipy libraries, \ldots
+
+\subsection{Object oriented neurons}
+
+\subsection{Synapses}
+
+\subsection{Stochastic generation of networks}
+
+\subsubsection{Grouping neurons}
+
+\subsubsection{Function parameters instead of static parameters}
+
+\subsection{Measuring spiking patterns across the network}
+
+-Mark certain neurons as recording
+-This can be done as a boolean flag on the neuron to tell it to keep a time
+trace of its potential, or by inserting measurement objects into the simulation.
+These measurement objects can take the form of 
+
+\subsection{Comparing spiking patterns between two networks.}
+
+Treating spikes as a binary on-off at a given point in time, it is possible to
+calculate the hamming distance between two network spiking patters. 
+

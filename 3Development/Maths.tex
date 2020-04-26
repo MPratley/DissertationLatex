@@ -1,26 +1,63 @@
 \section{Modelling mathematics}
-"In order to program this thing I must first enumerate the differential equations
-that describe the functioning of Neurons in this spiking neural network."
 
-\begin{quote}
-    Mathematically, neurons can be described as hybrid systems: the state of a
-    neuron evolves continuously according to some biophysical equations, which
-    are typically differential equations (deterministic or stochastic, ordinary
-    or partial differential equations), and spikes received through the synapses
-    trigger changes in some of the variables. \autocite{brette_simulation_2007} 
-\end{quote}
+In order to program a neural network, I will first enumerate the differential
+equations that describe constituent neurons. A neuron state at a given time is
+typically defined by a collection of differential equations, while spikes are
+occur as a response to changes in this state
+\autocite{brette_simulation_2007}.
 
 
 \subsection{Leaky Integrate and Fire}
 
-TEMP:
+The simplest approximation of a spiking neuron that retains the chemical
+behaviour of a biological action potential are Leaky Integrate and Fire (LIF) neurons. As any neuron is, in effect, a
+signal processing unit, they can be modelled as a circuit.
+
+\begin{figure}
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[width=.8\linewidth]{figures/images/LIFCircuit1.png}
+        \caption{1a}
+        \label{fig:sfig1}
+    \end{subfigure}%
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[width=.8\linewidth]{figures/images/LIFCircuit2.png}
+        \caption{1b}
+        \label{fig:sfig2}
+    \end{subfigure}
+    \caption{plots of....}
+    \label{fig:fig}
+\end{figure}
+
+% \begin{figure}[h]
+%     \centering
+%     \includegraphics{figures/images/LIFCircuit1.png}
+%     \DoubleCaption{Schematic diagram of an Integrate and Fire model}
+%     {\small{Adapted from \cite{gerstner_spiking_2002}}}
+%     \label{LIFCircuit1}
+% \end{figure}
+% \vspace{1ex}
+
+% The schematic in figure \ref{LIFCircuit1} depicts a 
+
+% The basic circuit of an integrate-and-fire model consists of a capacitor C in parallel with a resistor R driven by a current I(t);
+
+% \begin{figure}[h]
+%     \centering
+%     \includegraphics{figures/images/LIFCircuit2.png}
+%     \caption{Schematic diagram of currents in a Integrate and Fire model}
+%     \label{LIFCircuit2}
+% \end{figure}
+% \vspace{1ex}
+
 \begin{figure*}[h]
     \centering
     \begin{equation}\label{eq:LIF_TC}
         T_C
     \end{equation}
     \begin{equation}\label{eq:LIF_RC}
-        \frac{d V}{d t} = -\frac{V}{\tau_L} + \frac{I(t)}{C},
+        \frac{d V}{d t} = -\frac{V}{\tau_L} + \frac{I(t)}{C}
     \end{equation}
     \begin{equation}\label{eq:integ_LIF_RC_VL}
         V(t)= \frac{1}{C} \int_{0}^{t} e^{-\frac{(t-s)}{\tau_L}} I(s) ds

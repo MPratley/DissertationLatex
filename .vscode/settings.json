@@ -176,11 +176,13 @@
         }
     ],
     "spellright.language": [
+        "en_GB",
         "English (British)"
     ],
     "spellright.documentTypes": [
         "markdown",
         "latex",
         "plaintext"
-    ]
+    ],
+    "spellright.groupDictionaries": false
 }

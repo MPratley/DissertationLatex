@@ -14,7 +14,7 @@ The simplest approximation of a spiking neuron that retains the chemical
 behaviour of a biological action potential are Leaky Integrate and Fire (LIF) neurons. As any neuron is, in effect, a
 signal processing unit, they can be modelled as a circuit.
 
-\begin{figure}[h]
+\begin{figure}[ht]
     \begin{subfigure}{.5\textwidth}
         \centering
         \includegraphics[width=.9\linewidth]{figures/images/LIFCircuit1.png}
@@ -64,15 +64,13 @@ give the standard form for an IF neuron, equation \ref{eq:IF_SF}. \autocite{burk
     \tau_C \frac{d v(t)}{d t} = - v(t) + R I(t)
 \end{equation}
 
-A python version of this program and a graph of its output are shown in figure
-\ref{fig:LIFSingleSpikeGraphCode}. The code is roughly based on example MATLAB
-code from \autocite[table 3.1]{trappenberg_fundamentals_2009} rewritten in
-idiomatic python. 
+A simple python implementation of this equation simulated for 100ms and a graph
+of its output are shown in figure \ref{fig:LIFSingleSpikeGraphCode}. 
 
-\begin{figure}[h]
+\begin{figure}[h!]
     \begin{subfigure}{.6\textwidth}
         \centering
-        \includegraphics[width=1.0\linewidth]{figures/graphs/singleSpikingNeuron.png}
+        \includegraphics[width=1.0\linewidth]{figures/graphs/singleSpikingNeuron.eps}
         \caption{IF model}
         \label{fig:LIFSingleSpikeGraph}
     \end{subfigure}%
@@ -86,17 +84,50 @@ idiomatic python.
     \label{fig:LIFSingleSpikeGraphCode}
 \end{figure}
 
+The code is roughly based on example MATLAB code from \autocite[table
+3.1]{trappenberg_fundamentals_2009} rewritten in idiomatic python. TODO explain
+some rationale behind numbers and loop.
 
-\begin{figure}[h]
+\begin{figure}[h!]
     \centering
-    \includegraphics[width=.6\linewidth]{figures/graphs/dualSpikingNeuron.png}
+    \addtolength{\leftskip} {-3cm}
+    \addtolength{\rightskip}{-3cm}
+    \includegraphics[width=1.4\linewidth]{figures/graphs/entropyofdt.eps}
+    \caption{IF model with TODO}
+    \caption{TODO}
+    \label{fig:entropyofdt}
+\end{figure}
+
+Simulating a
+neuron computationally requires integration, which means defining a suitably
+small time-step $dt$ with which to perform descritization. The accuracy of
+several $dt$ values is assessed in figure \ref{fig:entropyofdt}.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=.6\linewidth]{figures/graphs/dualSpikingNeuron.eps}
     \caption{IF model with TODO}
     \caption{TODO}
     \label{fig:LIFDoubleGraph}
 \end{figure}
 
+
+
 \pagebreak
 
-\subsection{Spike refractory periods}
+% \subsection{Spike refractory periods}
+
+% While the previously defined LIF neurons are sufficient for 
+
+\subsection{Synapse mechanics}
+
+Synapses betwen neurons effectively function as a gate, where the current that
+passes through the gate decreases exponentially as time passes without any
+pre-synaptic spikes. 
+
+\begin{equation}\label{eq:Presynaptic1}
+    f
+\end{equation}
 
 \subsection{STDP}
+

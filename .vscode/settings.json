@@ -184,5 +184,6 @@
         "latex",
         "plaintext"
     ],
-    "spellright.groupDictionaries": false
+    "spellright.groupDictionaries": false,
+    "workbench.colorTheme": "Solarized Light"
 }

@@ -1,22 +1,51 @@
-\section{Software development methodology}
 
-waterfall approach, copy from proposal.
 
 \section{Transferring models to Python}
 
-In order to flexibly mix
-object oriented and functional programming paradigms, I've chosen to develop these
-models in the Python programming language. Python also has a healthy and active
-ecosystem of libraries and development practices for scientific and statistical research.
+In order to flexibly mix object oriented and functional programming paradigms,
+I've chosen to develop these models in the Python programming language. Python
+also has a healthy and active ecosystem of libraries and development practices
+for scientific and statistical research.
 
 Of particular note are the SciPy libraries, \ldots
 
+
+
 \subsection{Object oriented neurons}
+
+In order to make the simulation as extensible as possible, I have chosen to
+implement it in an object oriented manner, with inheritance present in places
+where it makes sense to use it. [MAKE A QUICK UML DIAGRAM]
+
+Advantage of oop is that all the pipework around cloning objects is handled
+by the language with minimal effort, ideal for running similar simulation with
+slight parameter differences.
 
 \subsection{Synapses}
 
-\subsection{Stochastic generation of networks}
+In order to model the passing of information through the simulation, there were
+several approaches that I could take. In order to pick a solution, it is
+necessary to map out the relationships between neurons in some sample topologies
+and the features that need to be supported by the synapses in such topologies.
 
-\subsubsection{Grouping neurons}
+% \subsection{Grouping neurons}
+
+% In order to 
+
+\subsubsection{Stochastic generation of networks}
+
+When creating large networks of neurons, it is simpler to organise them in
+groups that are generated with random variables, and to stochastically link
+neuron groups with synapse groups. 
 
 \subsubsection{Function parameters instead of static parameters}
+
+It is desirable to make the parameters that define the random distribution in a group
+generation function be configurable at runtime, but increasing the number of
+parameters in a function signature increases the mental overhead when a programmer is
+using an API [CITE THIS]. 
+
+However,
+this can be simplified even further by passing a single PYTHON CALLABLE, which
+in practice is a closure that encapsulates a function that produces a
+distribution of the user's choice. 

@@ -103,18 +103,6 @@ neuron computationally requires integration, which means defining a suitably
 small time-step $dt$ with which to perform descritization. The accuracy of
 several $dt$ values is assessed in figure \ref{fig:entropyofdt}.
 
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=.6\linewidth]{figures/graphs/dualSpikingNeuron.eps}
-    \caption{IF model with TODO}
-    \caption{TODO}
-    \label{fig:LIFDoubleGraph}
-\end{figure}
-
-
-
-\pagebreak
-
 % \subsection{Spike refractory periods}
 
 % While the previously defined LIF neurons are sufficient for 
@@ -125,25 +113,37 @@ Synapses between neurons effectively function as a gate, where the current that
 passes through the gate decreases exponentially as time passes without any
 pre-synaptic spikes. In general this relationship can be approximated by the
 equation \ref{eq:Presynaptic1}, where the current across the synapse at a given
-point is the product of the conductivity of the synapse channel $g_{syn}$ and the
-reversal potential $E_{syn}$. As we are dealing solely with excitatory synapses in this
-model, we can assume $E_{syn} = 0$.
+point is the product of the conductivity of the synapse channel $g_{syn}$ and
+the reversal potential $E_{syn}$. As we are dealing solely with excitatory
+synapses in this model, we can assume $E_{syn} = 0$.
 
 \begin{equation}\label{eq:Presynaptic1}
     I_{syn} = g_{syn}(t)\cdot(v-E_{syn})
 \end{equation}
 
-The complexity of $g_{syn}$ that is required for a given model is different
-depending on the intent. For this model it is necessary to implement basic
-synaptic functionality, in particular, the delay between between the firing
+The complexity of $g_{syn}$ can be different depending on the intent of the
+simulation. For this model it is necessary to implement basic synaptic
+functionality, in particular, the delay $t_{del}$ between between the firing
 time of a pre-synaptic neuron $t^f_{pre}$ and the point at which the channel
-conductivity reacts to the spike. A simple formula for this is shown in figure
-\ref{eq:Presynaptic2}, where only the most recent pre-synaptic firing time is
-taken into account.
+conductivity reacts to the spike. The conductance of the synaptic channel should
+also reduce exponentially after a spike has occurred. A simple formula that meets these requirements 
+is shown in figure \ref{eq:Presynaptic2}, where only the most recent
+pre-synaptic firing time $t^f_{pre}$ is taken into account.
 
 \begin{equation}\label{eq:Presynaptic2}
-    g_{syn}(t) = \frac{q}{\tau_s}\cdot e^{-(\frac{t-t^f_{pre}}{\tau_s})}
+    g_{syn}(t) = \frac{q}{\tau_s}\cdot e^{-(\frac{t-t^f_{pre}-t_{del}}{\tau_s})} \cdot \Theta(t-t^f_{pre}-t_{del})
 \end{equation}
+
+
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=.6\linewidth]{figures/graphs/dualSpikingNeuron.eps}
+    \caption{IF model with TODO}
+    \caption{TODO}
+    \label{fig:LIFDoubleGraph}
+\end{figure}
+
 
 \subsection{STDP}
 

@@ -14,7 +14,7 @@ The simplest approximation of a spiking neuron that retains the chemical
 behaviour of a biological action potential are Leaky Integrate and Fire (LIF) neurons. As any neuron is, in effect, a
 signal processing unit, they can be modelled as a circuit.
 
-\begin{figure}[ht]
+\begin{figure}[h!]
     \begin{subfigure}{.5\textwidth}
         \centering
         \includegraphics[width=.9\linewidth]{figures/images/LIFCircuit1.png}
@@ -46,26 +46,30 @@ Through Ohm's law, $I_R = \frac{v(t)}{R}$, while from the definition of capacity
 the current on the capacitor is found as
 $I_C = C \frac{d v(t)}{d t}$ \autocite{gerstner_spiking_2002}.
 
-\begin{equation}\label{eq:IF_Itpre}
+\begin{myequation}\label{eq:IF_Itpre}
     I(t) = I_R + I_C = \frac{v(t)}{R} + C \frac{d v(t)}{d t}
-\end{equation}
+\end{myequation}
 
 Multiplying $I(t)$
 by $R$ gives equation \ref{eq:IF_It}.
 
-\begin{equation}\label{eq:IF_It}
+\begin{myequation}\label{eq:IF_It}
     R I(t) = v(t) + R C \frac{d v(t)}{d t}
-\end{equation}
+\end{myequation}
 
 Defining $RC$ as time constant $\tau_C$, rearranging \ref{eq:IF_It} will
 give the standard form for an IF neuron, equation \ref{eq:IF_SF}. \autocite{burkitt_review_2006,trappenberg_fundamentals_2009,teeter_generalized_2018}
 
-\begin{equation}\label{eq:IF_SF}
+\begin{myequation}\label{eq:IF_SF}
     \tau_C \frac{d v(t)}{d t} = - v(t) + R I(t)
-\end{equation}
+\end{myequation}
 
 A simple python implementation of this equation simulated for 100ms and a graph
-of its output are shown in figure \ref{fig:LIFSingleSpikeGraphCode}. 
+of its output are shown in figure \ref{fig:LIFSingleSpikeGraphCode}. The code is roughly based on example MATLAB code from \autocite[table
+3.1]{trappenberg_fundamentals_2009} rewritten in idiomatic python. TODO explain
+some rationale behind numbers and loop.
+
+\newpage
 
 \begin{figure}[h!]
     \begin{subfigure}{.6\textwidth}
@@ -84,9 +88,11 @@ of its output are shown in figure \ref{fig:LIFSingleSpikeGraphCode}.
     \label{fig:LIFSingleSpikeGraphCode}
 \end{figure}
 
-The code is roughly based on example MATLAB code from \autocite[table
-3.1]{trappenberg_fundamentals_2009} rewritten in idiomatic python. TODO explain
-some rationale behind numbers and loop.
+Simulating a
+neuron computationally requires integration, which means defining a suitably
+small time-step $dt$ with which to perform descritization. The accuracy of
+several $dt$ values is assessed in figure \ref{fig:entropyofdt}. ERROR FROM
+LARGE DT VALUES GROWS EXPONENTIALLY. 
 
 \begin{figure}[h!]
     \centering
@@ -98,10 +104,7 @@ some rationale behind numbers and loop.
     \label{fig:entropyofdt}
 \end{figure}
 
-Simulating a
-neuron computationally requires integration, which means defining a suitably
-small time-step $dt$ with which to perform descritization. The accuracy of
-several $dt$ values is assessed in figure \ref{fig:entropyofdt}.
+
 
 % \subsection{Spike refractory periods}
 
@@ -117,22 +120,30 @@ point is the product of the conductivity of the synapse channel $g_{syn}$ and
 the reversal potential $E_{syn}$. As we are dealing solely with excitatory
 synapses in this model, we can assume $E_{syn} = 0$.
 
-\begin{equation}\label{eq:Presynaptic1}
-    I_{syn} = g_{syn}(t)\cdot(v-E_{syn})
-\end{equation}
+\begin{myequation}\label{eq:Presynaptic1}
+    I_{syn}(t) = g_{syn}(t-t^f_{pre}-t_{del})\cdot(v-E_{syn})
+\end{myequation}
 
 The complexity of $g_{syn}$ can be different depending on the intent of the
 simulation. For this model it is necessary to implement basic synaptic
 functionality, in particular, the delay $t_{del}$ between between the firing
 time of a pre-synaptic neuron $t^f_{pre}$ and the point at which the channel
 conductivity reacts to the spike. The conductance of the synaptic channel should
-also reduce exponentially after a spike has occurred. A simple formula that meets these requirements 
-is shown in figure \ref{eq:Presynaptic2}, where only the most recent
-pre-synaptic firing time $t^f_{pre}$ is taken into account.
+also reduce exponentially after a spike has occurred. A simple formula that
+meets these requirements is shown in equation \ref{eq:Presynaptic2}, where only
+the most recent pre-synaptic firing time $t^f_{pre}$ is taken into account.
+$\tau_s$ is the time constant of the synaptic channel. A greater value of
+$\tau_s$ increases the time taken for the conductivity to slope off. More
+complex models may also specify a resistance or charge associated with the
+synapse. 
 
-\begin{equation}\label{eq:Presynaptic2}
-    g_{syn}(t) = \frac{q}{\tau_s}\cdot e^{-(\frac{t-t^f_{pre}-t_{del}}{\tau_s})} \cdot \Theta(t-t^f_{pre}-t_{del})
-\end{equation}
+\begin{myequation}\label{eq:Presynaptic2}
+    g_{syn}(x) = 
+    \begin{cases}
+        0 & x < 0 \\
+        e^{-(\frac{x}{\tau_s})} & x >= 0
+    \end{cases}
+\end{myequation}
 
 
 

@@ -1,4 +1,4 @@
-\documentclass[10.5pt,oneside,openright]{report} 
+\documentclass[10.5pt,twoside,openright]{report} 
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
 % \usepackage{verbatim}
@@ -30,11 +30,16 @@ activity with a computational model}
 \usepackage{amsmath, amsthm, amssymb, amsfonts}
 \usepackage{breakcites}
 \usepackage{subcaption}
-\usepackage{graphics}
+\usepackage{graphicx}
 % \usepackage{setspace}
 % \doublespacing
 
-
+\usepackage{environ}
+\NewEnviron{myequation}{%
+\begin{equation}
+\scalebox{1.5}{$\BODY$}
+\end{equation}
+}
 
 
 % \usepackage{tocloft}

@@ -7,36 +7,38 @@
 The topic of creating artificial life has been subject to fervent debate for
 hundreds of years, but at the advent of modern computing this conversation took
 a turn towards the technological. In his 2005 book “The Singularity Is Near:
-When Humans Transcend Biology” author Ray Kurzweil predicts not that we will
-create a new species, but that we will be able to transfer our
-consciousness to emulations of the human brain.\autocite{kurzweil_singularity_2006}
+When Humans Transcend Biology” author Ray Kurzweil predicts that rather than
+creating new species that mimics humanity, we will be able to transfer our
+consciousness to emulations of the human brain with far greater cognitive power
+than our biological limits allow \autocite{kurzweil_singularity_2006}.
 
 \begin{quote}
       `The Singularity will allow us to transcend [the] limitations of our
       biological bodies and brains. We will gain power over our fates. Our
-      mortality will be in our own hands [\ldots] Although the Singularity has many faces, its most important implication is this: our technology will match and then vastly exceed the refinement and suppleness of what we regard as the best of human traits.'
+      mortality will be in our own hands [\ldots] Although the Singularity has
+      many faces, its most important implication is this: our technology will
+      match and then vastly exceed the refinement and suppleness of what we
+      regard as the best of human traits.'
 \begin{flushright}
       \textit{-- Ray Kurzweil \\ The Singularity Is Near: When Humans Transcend
-      Biology (\citeyear{kurzweil_singularity_2006})
-      }
+      Biology (\citeyear{kurzweil_singularity_2006})}
   \end{flushright}
 \end{quote}  
 
-The implication of this is
-that, assuming in-exhaustive power and processing to maintain the simulation,
-humanity would be made immortal. However, there are a number of constraints
-technologically that must be reckoned with before this could even be attempted
-\parencite{bostrom_whole_2008}, alongside the moral quandaries that are ever
-present when discussing the evolution and modification of what it means to be
-human.
+The implication of this could be that, assuming inexhaustible power and
+processing to maintain the simulation, humanity would be made immortal. However,
+there are a number of constraints technologically that must be reckoned with
+before this could even be attempted \parencite{bostrom_whole_2008}, alongside
+the moral quandaries that are ever present when discussing the evolution and
+modification of what it means to be human.
 
 When discussing brain emulation, we envisage the “uploading” of consciousness,
 which in basic terms is the measurement of electrical activity and neural
 connections of a brain, and in theory would retain every mental process, keeping
 them intact. Using current known techniques, this measurement process would
 introduce error in numerous ways; It is perhaps possible that the resolution of
-the scanning equipment is not large enough to correctly capture the distances
-between neurons, or that changes in the network will occur while measurements
+the scanning equipment is not large enough to capture the distances between
+neurons correctly, or that changes in the network will occur while measurements
 are taken. It is therefore unclear what impact this measurement error would have
 on a simulation of the human brain.
 
@@ -52,14 +54,12 @@ that is capable of running simulations in a parallel manner across multiple
 threads, that can be modified during runtime to model the effect of measurement
 error when `uploading' a brain into a simulation.
 
-\pagebreak
-
 \section{Aims and Objectives}
 
 This project was originally planned to be built on top of the VERTEX simulator.
 However, once my research began I decided that I would instead shift more
-towards building the simulation tooling myself to better learn and understand
-the mathematics than underpin computation neuroscience.
+towards building the simulation tooling myself to learn and understand better
+the mathematics that underpin computation neuroscience.
 
 \subsubsection{Analyse and compare three published neural simulation packages.}
 
@@ -88,7 +88,7 @@ Given the experiments that are defined in order to meet the previous objective,
 a set of requirements for the simulation software can be identified. This will
 include the Python API presented to the user of the software, required data
 structures to store information, and choosing functionality which forms the
-minimal viable product. To achieve this, I must have collected enough research
+minimal viable product. To achieve this, I will have collected enough research
 to make conclusive design and functionality decisions.
 
 
@@ -98,9 +98,9 @@ to make conclusive design and functionality decisions.
 
 Many of the parameters required in the creation of a simulation, such as the
 number of layers or the positions and links between neurons could be modified
-during a simulation using the tooling this project aims to develop. This
-objective will be complete when I have identified these parameters, and
-justified why they have been chosen over others.
+during a simulation using the tooling this project aims to develop. To achieve
+this objective I will identify these parameters, and justify why they have been
+chosen over other parameters.
 
 
 \subsubsection{Analyse the performance of simulations
@@ -109,7 +109,7 @@ justified why they have been chosen over others.
 This final objective will assess whether the software designed and developed
 during the course of the project can correctly demonstrate the effect of
 measurement error on brain simulation. This objective will be met once the
-experiments are shown to have provided conclusive results.
+experiments are shown to provide reliable results.
 
 \pagebreak
 
@@ -136,7 +136,7 @@ experiments are shown to have provided conclusive results.
 \section{Document Structure}
 
 \subsection*{Background and Literature Review}
-This chapter aims to convey the general state of what is considered mainstream
+This chapter aims to evaluate the general state of what is considered mainstream
 academic and industry opinion, and some of the more cutting edge approaches in
 each of the domains that this project touches on.
 
@@ -147,15 +147,17 @@ particular, functionality of the neural network simulation will be discussed, as
 will the simulation parameters.
 
 \subsection*{Experiments and Results}
-The rudimentary correctness of the Python simulation is verified here, and each
-of the experiments that form the basis of the arguments made in this
+The underpinning reliability of the Python simulation is verified here, and
+each of the experiments that form the basis of the arguments made in this
 dissertation are expanded on and their results are explained.
 
 \subsection*{Analysis and Evaluation}
 An analysis and evaluation will review the results in the previous chapter and
 show how the results reflect on the overall project aims. The results of all the
 experiments are reviewed holistically and compared with expected findings.
+
 \subsection*{Conclusion}
-A summary of the project, and whether the aim and objectives have been met. The
-overall success of the project is evaluated and future work that could be
-completed in another project expanded on.
+This chapter will offer a summary of the project, and whether the aim and
+objectives have been met. This project is evaluated against it's aims and
+objectives. Future work that could be completed in another project will be
+identified.

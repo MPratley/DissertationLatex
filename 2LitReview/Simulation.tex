@@ -48,7 +48,7 @@ becomes easy to map between general neuronal activity in a simulated model and
 brain activity of, say, a real-world patient in a medical trial.
 
 A 2019 update to VERTEX introduced a range of simulation features, the most
-notable of which for the purposes of this project being Spike Time Dependant
+notable of which for the purposes of this project is Spike Time Dependent
 Plasticity (STDP), which dynamically adapts the weighting of synapses based on
 the observed causality of pre-synaptic spikes on post-synaptic spikes
 \autocite{thornton_virtual_2019}. Details on how this may be implemented and
@@ -91,20 +91,20 @@ resources still holds.
 
 \subsubsection{Brian}
 
-Brain is another simulator for spiking neural networks, distributed as a python
-library. Brian offers a unique programming interface whereby the differential
-equations that define a Neuron can be written in plain-text and are interpreted
-at runtime. Provided the equation can be interpreted, this approach
-makes computing mathematical models extremely simple, and is ideal for
-quickly testing variations of a model \autocite{stimberg_brian_2019}. This is,
-however, less useful for more complex relationships between neurons where the
-plain-text mathematical syntax develops its own API on top of the Python API.
-Fortunately users of the library may provide native python functions to define
-the behaviour of their neurons if desired \autocite{noauthor_functions_2020}.
-The complexity of actual neurons in a Brian simulation is as complex as a
-programmer intends it to be: Neurons can be placed in physical space if desired,
-but this is optional. The time taken to simulate a network is largely dependant
-on the time complexity of the user-defined equations that define the neurons.
+"Brian" is another simulator for spiking neural networks, distributed as a
+Python library. Brian offers a unique programming interface whereby the
+differential equations that define a Neuron can be written in plain-text and are
+interpreted at runtime. Provided the equation can be interpreted, this approach
+makes computing mathematical models extremely simple, and is ideal for quickly
+testing variations of a model \autocite{stimberg_brian_2019}. This is, however,
+less useful for more complex relationships between neurons where the plain-text
+mathematical syntax develops its own API on top of the Python API. Fortunately
+users of the library may provide native Python functions to define the behaviour
+of their neurons if desired \autocite{noauthor_functions_2020}. The complexity
+of actual neurons in a Brian simulation is as complex as a programmer intends it
+to be: Neurons can be placed in physical space if desired, but this is optional.
+The time taken to simulate a network is largely dependant on the time complexity
+of the user-defined equations that define the neurons.
 
 \subsection{Similarities in existing software packages}
 

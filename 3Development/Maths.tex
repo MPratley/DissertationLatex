@@ -148,11 +148,22 @@ synapse.
 
 
 \begin{figure}[h!]
-    \centering
-    \includegraphics[width=.6\linewidth]{figures/graphs/dualSpikingNeuron.eps}
-    \caption{IF model with TODO}
-    \caption{TODO}
-    \label{fig:LIFDoubleGraph}
+    \addtolength{\leftskip} {-2.5cm}
+    \addtolength{\rightskip}{-2.5cm}
+    \begin{subfigure}{.65\textwidth}
+        \centering
+        \includegraphics[width=1\linewidth]{figures/graphs/twospikingneuronsnodelay.eps}
+        \caption{$t_{del} = 0ms$}
+        \label{fig:LIFDUAL0DEL}
+    \end{subfigure}%
+    \begin{subfigure}{.65\textwidth}
+        \centering
+        \includegraphics[width=1\linewidth]{figures/graphs/twospikingneuronsdelay.eps}
+        \caption{$t_{del} = 5ms$}
+        \label{fig:LIFDUALBUGDEL}
+    \end{subfigure}
+    \caption{Two neurons in series}
+    \label{fig:LIFDUAL}
 \end{figure}
 
 

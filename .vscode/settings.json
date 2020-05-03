@@ -176,14 +176,13 @@
         }
     ],
     "spellright.language": [
-        "en_GB",
         "English (British)"
     ],
     "spellright.documentTypes": [
         "markdown",
-        "latex",
-        "plaintext"
+        "plaintext",
+        "latex"
     ],
     "spellright.groupDictionaries": false,
-    "workbench.colorTheme": "Solarized Light"
+    "workbench.colorTheme": "Night Owl Light"
 }

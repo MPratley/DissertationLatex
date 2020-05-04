@@ -34,63 +34,65 @@ specifications and drawbacks of several imaging methods are described below.
 
 \subsubsection*{MRI}
 
-Magnetic Resonance Imaging (MRI) scanning is a common medical procedure, but at
-current generally available resolutions is not suitable for reconstructing any
-kind of neural model owing to its low resolution. Future technologies that which
-to enable brain emulation of the biologically alive would need to offer a
-similar feature set as MRI scanning while producing images many thousands of
-times more detailed. Such MRI microscopy does exist currently, but is
-significantly more limited in scale, scanning small chunks of cortical tissue at
-a very high resolution
+Magnetic Resonance Imaging (MRI) scanning is a common medical procedure, and can
+be used to provide information about the regions of the brain and general
+connective patterns between these regions. However, at current generally
+available resolutions, MRI is not suitable for reconstructing any kind of neural
+model that contains information pertaining to discrete connections between
+neurons. Future technologies that which to enable brain emulation of the
+biologically alive would need to offer a similar feature set as MRI scanning
+while producing images many thousands of times more detailed. Such MRI
+microscopy does exist currently, but is significantly more limited in scale,
+scanning small chunks of cortical tissue at a very high resolution
 \autocite{johnson_three-dimensional_1987,bostrom_whole_2008}.
 
 \subsubsection*{Electron Microscope Scanning}
 
-TODO
+Electron Microscopy (EM) is a commonly used technology in any discipline where
+one may wish to resolve detail at the scale of nanometres, since the resolution
+of light microscopy is generally limited by diffraction. As a result, it is
+the imaging method of choice for neural and cortical tissue
+\autocite{marc_retinal_2013, kaynig_large-scale_2015}, but not without drawbacks
+however.
 
-In order to reach the required resolutions today, Electron Microscopes (EM) are
-commonly used. 
+%  - precise
+%  - long time
+%  - freeze or measurement drift
 
-- Very precise
-- Can take a very long time
-- Need well "frozen" slices of the brain for this to be of any use or you'll
-have major measurement drift as the brain decays.
+\subsection{Connectomics and network modelling}
+% Connectomics is a strategy for mapping complex neural networks based on high-speed automated electron optical imaging, computational assembly of neural data volumes, web-based navigational tools to explore 1012–1015 byte (terabyte to petabyte) image volumes, and annotation and markup tools to convert images into rich networks with cellular metadata. \autocite{marc_retinal_2013}
 
-\subsection{Turning image data into a connectome}
-TODO:
-\begin{quote}
-    Dense connectomic mapping of neuronal circuits is limited by the time and
-    effort required to analyse 3D electron microscopy (EM) datasets. Algorithms
-    designed to automate image segmentation suffer from substantial error rates
-    and require significant manual error correction. Any improvement in
-    segmentation error rates would therefore directly reduce the time required
-    to analyse 3D EM data.
-    \autocite{pallotto_extracellular_2015} \autocite{tomsett_virtual_2015}
+% Dense connectomic mapping of neuronal circuits is limited by the time and
+% effort required to analyse 3D electron microscopy (EM) datasets. Algorithms
+% designed to automate image segmentation suffer from substantial error rates
+% and require significant manual error correction. Any improvement in
+% segmentation error rates would therefore directly reduce the time required
+% to analyse 3D EM data.
+% \autocite{pallotto_extracellular_2015}
 
-    \begin{figure}[h]
-        \centering
-        \includegraphics[scale=0.75]{figures/images/reconstruction.jpg}
-        \DoubleCaption{Illustration of a typical workflow for connectome
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.75]{figures/images/reconstruction.jpg}
+    \DoubleCaption{Illustration of a typical workflow for connectome
         reconstruction}
-        {Reproduced from \cite{kaynig_large-scale_2015}}
-        \label{reconstruction}
-    \end{figure}
-    \vspace{1ex}
+    {Reproduced from \cite{kaynig_large-scale_2015}}
+    \label{reconstruction}
+\end{figure}
+\vspace{1ex}
 
-    The delineation of morphologies has proven to be the most difficult step to
-    automate. Current machine learning-based analysis methods enable
-    semi-automated reconstructions (segmentations) of neurons that still require
-    significant human effort to correct.
-    \autocite{helmstaedter_connectomic_2013}
-\end{quote}
+% The delineation of morphologies has proven to be the most difficult step to
+% automate. Current machine learning-based analysis methods enable
+% semi-automated reconstructions (segmentations) of neurons that still require
+% significant human effort to correct.
+% \autocite{helmstaedter_connectomic_2013}
 
 \subsection[Error induced through noise]{Examination of Error induced through the imaging process}
 
-Prediction of future brain activity through simulation requires an accurate and
-detailed connectome of a brain, with synapses and neurons correctly located in
-space.\autocite{bostrom_whole_2008} The accuracy of such a model depends on the
-resolution of the imaging method used to create it. The error resulting from
-such a imaging method is the measurement error. Depending on imaging procedure, brain matter may shift in composition during the course of the scan, which is the cause of measurement drift, itself a form of measurement error.
+% Prediction of future brain activity through simulation requires an accurate and
+% detailed connectome of a brain, with synapses and neurons correctly located in
+% space.\autocite{bostrom_whole_2008} The accuracy of such a model depends on the
+% resolution of the imaging method used to create it. The error resulting from
+% such a imaging method is the measurement error. Depending on imaging procedure, brain matter may shift in composition during the course of the scan, which is the cause of measurement drift, itself a form of measurement error.
 
 \input{figures/tables/comparisonOfImagingMethods.tex}
 

@@ -1,18 +1,22 @@
-\setlength{\tabcolsep}{4ex}
+\setlength{\tabcolsep}{3.3ex}
 \renewcommand{\arraystretch}{1.1}
-\begin{table}[ht]
+\begin{table}[h!]
     \centering
-    \begin{tabular}{@{}llll@{}}
-        Method              & Resolution                 & Time    & Error(approx.) \\
+    \addtolength{\leftskip} {-0.5cm}
+    \addtolength{\rightskip}{-0.5cm}
+    \begin{tabular}{@{}lllll@{}}
+        Method              &Environment& Resolution                 & Time       &
+        Error(approx.)                                                       \\
         \hline
-        MRI                 & 6$\mu m$                   & 30 minutes  & 95\%           \\
-        MRI microscopy      & 3$\mu m$                   & -       & 85\%           \\
-        XRay microscopy     & 30nm                       & -       & 30\%           \\
-        Electron microscopy & \textasciitilde 30nm-0.1nm & > 3 months & <1\%           \\
-        Theoretical Ideal   & <5nm                       & <500s   & <1\%           \\
+        MRI                 &In Vivo& 6$\mu m$                   & 30 minutes & 95\% \\
+        MRI microscopy      &In Vitro& 3$\mu m$                   & -          & 85\% \\
+        XRay microscopy     &In Vitro& 30nm                       & -          & 30\% \\
+        Electron microscopy &In Vitro& \textasciitilde 30nm-0.1nm & > 3 months & <1\% \\
+        Theoretical Ideal   &Either& <5nm                       & <500s      & <1\% \\
         \hline
     \end{tabular}
-    \DoubleCaption{Comparison of imaging methods.}{Error approximated from size of dendritic spines.}
+    \DoubleCaption{Comparison of imaging methods over the whole human brain.}{Error approximated from size
+        of dendritic spines.}
     \label{imagemethodcomparison1}
 \end{table}
 \setlength{\tabcolsep}{1ex}

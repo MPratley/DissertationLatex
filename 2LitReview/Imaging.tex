@@ -49,28 +49,32 @@ scanning small chunks of cortical tissue at a very high resolution
 \subsubsection*{Electron Microscope Scanning}
 
 Electron Microscopy (EM) is a commonly used technology in any discipline where
-one may wish to resolve detail at the scale of nanometres, since the resolution
-of light microscopy is generally limited by diffraction. As a result, it is
-the imaging method of choice for neural and cortical tissue
-\autocite{marc_retinal_2013, kaynig_large-scale_2015}, but not without drawbacks
-however.
+one may wish to resolve detail at the scale of nanometres. Since the wavelength
+of accelerated electrons is much shorter than the wavelength of visible light,
+the resolution of EM is not limited by diffraction in the same way as optical
+imaging. As a result, it is the imaging method of choice for neural and cortical
+tissue \autocite{marc_retinal_2013, kaynig_large-scale_2015}. EM is not without
+drawbacks however, as brain tissue must be chemically preserved before
+processing, making it a complicated and expensive procedure. 
+
+One variation of EM is Correlative Light-Electron Microscopy (CLEM) which takes
+a hybrid approach to imaging the brain with both optical and electron imaging.
+CLEM therefore has the advantage of accurate recognition of cell types from the
+optical sensor, while the electron component provides the resolution required to
+determine structure. Correlating images from both sensors requires alignment
+through expensive computational techniques \autocite{voortman_integration_2014}.
 
 %  - precise
 %  - long time
 %  - freeze or measurement drift
 
 \subsection{Connectomics and network modelling}
-% Connectomics is a strategy for mapping complex neural networks based on high-speed automated electron optical imaging, computational assembly of neural data volumes, web-based navigational tools to explore 1012–1015 byte (terabyte to petabyte) image volumes, and annotation and markup tools to convert images into rich networks with cellular metadata. \autocite{marc_retinal_2013}
+Connectomics is the production and study of connectomes, using electron
+microscopy images from layers of tissue to map complex neural networks
+\autocite{marc_retinal_2013}. This process can have many stages depending on the
+desired complexity of the connectome. 
 
-% Dense connectomic mapping of neuronal circuits is limited by the time and
-% effort required to analyse 3D electron microscopy (EM) datasets. Algorithms
-% designed to automate image segmentation suffer from substantial error rates
-% and require significant manual error correction. Any improvement in
-% segmentation error rates would therefore directly reduce the time required
-% to analyse 3D EM data.
-% \autocite{pallotto_extracellular_2015}
-
-\begin{figure}[h]
+\begin{figure}[h!]
     \centering
     \includegraphics[scale=0.75]{figures/images/reconstruction.jpg}
     \DoubleCaption{Illustration of a typical workflow for connectome
@@ -78,21 +82,35 @@ however.
     {Reproduced from \cite{kaynig_large-scale_2015}}
     \label{reconstruction}
 \end{figure}
-\vspace{1ex}
+% \vspace{1ex}
 
-% The delineation of morphologies has proven to be the most difficult step to
-% automate. Current machine learning-based analysis methods enable
-% semi-automated reconstructions (segmentations) of neurons that still require
-% significant human effort to correct.
-% \autocite{helmstaedter_connectomic_2013}
+A typical workflow for constructing
+connectomes is shown in figure \ref{reconstruction}, where large datasets
+produced from EM are processed and fused to create a 3D connectome that
+re-creates the original observed connectivity, complete with cellular metadata
+if enough detail has been resolved. This process is limited by the time and
+manual tuning required to process these EM datasets however, as automated
+algorithms for processing can produce errors, and the reliability of the
+connectome is limited by the quality of the EM data used to create it. 
+\autocite{pallotto_extracellular_2015} In
+particular, the recognition and reconstruction of network morphology is
+especially hard to automate reliably \autocite{helmstaedter_connectomic_2013}.
 
 \subsection[Error induced through noise]{Examination of Error induced through the imaging process}
 
-% Prediction of future brain activity through simulation requires an accurate and
-% detailed connectome of a brain, with synapses and neurons correctly located in
-% space.\autocite{bostrom_whole_2008} The accuracy of such a model depends on the
-% resolution of the imaging method used to create it. The error resulting from
-% such a imaging method is the measurement error. Depending on imaging procedure, brain matter may shift in composition during the course of the scan, which is the cause of measurement drift, itself a form of measurement error.
+Prediction of future brain activity through simulation requires an accurate and
+detailed connectome of a brain, with synapses and neurons correctly located in
+space and the metadata of each neuron in the system replicated with minimal
+error \autocite{bostrom_whole_2008}. The accuracy of such a model depends on the
+resolution of the imaging method used to create it, and the error resulting from
+such a imaging method is the measurement error. Depending on imaging procedure, brain matter may shift in composition during the course of the scan, which is the cause of measurement drift, itself a form of measurement error.
 
 \input{figures/tables/comparisonOfImagingMethods.tex}
 
+In the above table \ref{imagemethodcomparison1}, I have summarised each of the
+major methods that could be considered for imaging the whole human brain. The
+theoretical ideal represents the requirements for an imaging process that would
+enable the mass creation of connectomes, as a technical requirement of uploading
+general human consciousness to vast simulations. These error values will form
+the basis of the model and simulation that is described and evaluated later in
+this document.

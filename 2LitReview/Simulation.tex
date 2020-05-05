@@ -13,23 +13,27 @@ be conducted, and aim to abstract away purely computational concerns. Some of
 these packages that have different approaches to solving this are described in
 more detail below.
 
-\subsection{TODO: Rate vs Event Models}
+\subsection{Representing time in neural simulations}
 
-\begin{quote}
-    The advantage of clock driven simulation is that it is very flexible
-    (arbitrary differential equations can be used) and computationally
-    efficient. However, the time grid approximation can lead to an overestimate
-    of the amount of synchrony that is present in a network. This is usually not
-    a problem, and can be managed by reducing the time step, but it can be an
-    issue for some models.
-    
-    There are two families of algorithms for the simulation of neural networks: synchronous or “clock-driven” algorithms, in which all neurons are updated simultaneously at every tick of a clock, and asynchronous or “event-driven” algorithms, in which neurons are updated only when they receive or emit a spike (hybrid strategies also exist). Synchronous algorithms can be easily coded and apply to any model. Because spike times are typically bound to a discrete time grid, the precision of the simulation can be an issue. Asynchronous algorithms have been developed mostly for exact simulation, which is possible for simple models. For very large networks, the simulation time for both methods scale as the total number of spike transmissions, but each strategy has its own assets and disadvantages.
-\end{quote}
-
-\autocite{brette_simulation_2007}
-
-% write a section on rate vs event models. Brian docs have a good page on this.
-% https://brian2.readthedocs.io/en/stable/advanced/how_brian_works.html#clock-driven-versus-event-driven
+There are several approaches that can be taken with respect to both simulating
+individual neuron activity, and more general network activity. On the level of
+individual components of a simulated network, the two predominant choices are
+between a clock driven model and an event driven model. In a clock driven model,
+continuous time is split into discrete chunks, and it is the size of these
+chunks that determine the accuracy of the differential equations that define
+neuronal behaviour. Meanwhile, an event driven model asynchronous in nature, as
+neurons will only update on events, where these events are typically spikes or
+learning updates that propagate backwards. The advantage of a clock driven model
+is its flexibility in using any differential equation, however, more complex
+neuron models require a smaller time step leading to large computation times. An
+event driven model, by comparison, computes in real time and spikes are
+therefore unaffected by rounding errors from discretization
+\autocite{brette_simulation_2007}. It is also possible to simulate population
+dynamics to describe the average activity of neuronal populations
+\autocite{trappenberg_fundamentals_2009}, which is ideal for modelling neuronal
+populations that are on the scale of actual nervous systems with modern
+computational power. The downside to this, however, is that such generalised
+models are not always faithful approximations of true network effects between neurons.
 
 \subsection{Available neural simulation and modelling software packages}
 

@@ -1,14 +1,37 @@
 \section{Simulation Requirements}
 
+    % Justification should cite imaging requirements and state that this is an
+    % appropriate level of abstraction to answer the question of this
+    % dissertation. Refer to the table of emulation layers in lit review.
+
+While there are many different levels of emulation possible in the field of
+computational neuroscience, for the purposes of this dissertation, a spiking
+neural network is appropriate. This allows inserting error into the system that
+is equivalent to imaging error in both neurons and synapses when constructing
+connectomes from EM images. It is, however, not necessary to precisely emulate
+the chemical processes within the nervous system and these processes may be
+mathematically approximated. The following are the software requirements of the
+simulation that I have developed for the research purposes of this dissertation.
+
 \begin{itemize}
-    \item \textbf{Spiking neural network is the target emulation layer}
-    Justification should cite imaging requirements and state that this is an
-    appropriate level of abstraction to answer the question of this
-    dissertation. Refer to the table of emulation layers in lit review.
-    \item \textbf{Requirement 2.} Reasoning for requirement two.
-    \item \textbf{Requirement 3}
-    [TEMP] Justification should cite imaging requirements and state that this is an
-    appropriate level of abstraction to answer the question of this
-    dissertation. Refer to the table of emulation layers in lit review. TEMP
-    \item \textbf{Requirement 4} Reasoning for requirement two.
+    \item \textbf{Use a clock-driven model for Simulation} where time interval
+          is small enough to minimise descritization errors.
+
+    \item \textbf{Support some form of plasticity between neurons.} This should
+          be capable of performing weight updates in an unsupervised manner manner
+          across the network.
+          % [TEMP] Justification should cite imaging requirements and state that this is an
+          % appropriate level of abstraction to answer the question of this
+          % dissertation. Refer to the table of emulation layers in lit review. TEMP
+    \item \textbf{Simulation should be easily configurable at runtime using parameters}
+    \item \textbf{Should be easy to define large groups of neurons with individual parameters drawn from probability distributions}
+    \item \textbf{Should be capable of probabilistically creating synapses between neuron groups}
+    \item \textbf{Experiments performed with the simulation must be repeatable}
+          hence the stochastic element of network generation should be seed-able so
+          networks can be recreated.
+    \item \textbf{Network should support an optional stochastic input to emulate noise}
+    \item \textbf{Networks should be duplicable using standard Python techniques}
+    \item \textbf{It would be desirable for separate simulations to have the
+              capability to run in parallel} This requires creating computation pools due
+          to the limits of the Global Process Lock in the python interpreter.
 \end{itemize}

@@ -1,12 +1,10 @@
 \section{Modelling mathematics}
 
-TODO: Fix this paragraph
-In order to program a neural network, I will first enumerate the differential
-equations that describe constituent neurons. A neuron state at a given time is
-typically defined by a collection of differential equations, while spikes are
-occur as a response to changes in this state
-\autocite{brette_simulation_2007}.
-
+In order to program a neural network, it is necessary to first enumerate the
+differential equations that describe constituent neurons of a network. A neuron
+state at a given time is typically defined by a collection of differential
+equations, where spikes are occur as a response to changes in this state \autocite{brette_simulation_2007}. In the
+following section I will define and justify the behaviour of these neurons.
 
 \subsection{Leaky Integrate and Fire}
 
@@ -31,6 +29,7 @@ signal processing unit, they can be modelled as a circuit.
             adapted from \cite{gerstner_spiking_2002}}}
     \label{fig:LIFSchem}
 \end{figure}
+\vspace{1ex}
 
 The schematic in figure \ref{fig:LIFSchemA} depicts a simple integrate-and-fire
 circuit; A capacitor $C$ holds $q$ charge, and is in parallel with a resistor
@@ -66,10 +65,9 @@ give the standard form for an IF neuron, equation \ref{eq:IF_SF}. \autocite{burk
 
 A simple Python implementation of this equation simulated for 100ms and a graph
 of its output are shown in figure \ref{fig:LIFSingleSpikeGraphCode}. The code is roughly based on example MATLAB code from \autocite[table
-3.1]{trappenberg_fundamentals_2009} rewritten in idiomatic python. TODO explain
-some rationale behind numbers and loop.
-
-\newpage
+    3.1]{trappenberg_fundamentals_2009} rewritten in idiomatic python. The
+parameters of this loop are arbitrary, and the simulation is fully deterministic
+as $I(t)$ is a constant input.
 
 \begin{figure}[h!]
     \begin{subfigure}{.6\textwidth}
@@ -81,34 +79,44 @@ some rationale behind numbers and loop.
     \begin{subfigure}{.5\textwidth}
         \centering
         \includegraphics[width=1.0\linewidth]{figures/code/SingleLIFCode.png}
-        \caption{IF Currents}
+        \caption{IF Python code}
         \label{fig:LIFCode}
     \end{subfigure}
     \caption{Simulation of a single LIF neuron}
     \label{fig:LIFSingleSpikeGraphCode}
 \end{figure}
 
-Simulating a
-neuron computationally requires integration, which means defining a suitably
-small time-step $dt$ with which to perform descritization. The accuracy of
-several $dt$ values is assessed in figure \ref{fig:entropyofdt}. ERROR FROM
-LARGE DT VALUES GROWS EXPONENTIALLY. 
+\subsection{Descritization}
 
 \begin{figure}[h!]
     \centering
     \addtolength{\leftskip} {-3cm}
     \addtolength{\rightskip}{-3cm}
     \includegraphics[width=1.4\linewidth]{figures/graphs/entropyofdt.eps}
-    \caption{IF model with TODO}
-    \caption{TODO}
+    \caption{Comparison of $dt$ values, relative to $dt=0.001ms$}
     \label{fig:entropyofdt}
 \end{figure}
 
+Simulating a neuron computationally requires integrating its component
+differential equations with respect to time. This can be achieved by defining a
+suitably small time-step $dt$ with which to perform descritization. While the
+simulation in figure \ref{fig:LIFSingleSpikeGraphCode} above used $dt = 0.1$,
+this was a fairly arbitrary value and it's worth evaluating the relative
+accuracy of different $dt$ values. Figure \ref{fig:entropyofdt} compares the
+error produced with different values of $dt$. To
+produce this, a distribution $N_{dt}$ of the potential $Vm$ over a single neuron
+was created for each value of $dt$, with all other parameters kept equal, and those distributions compared to the
+baseline distribution $N_{dt=0.001}$. The comparison of these distributions was
+performed by measuring the relative entropy (Kulbach-Leibler divergence) and
+Earth Movers' Distance between them. Increasing the value of $dt$ can be seen to
+exponentially increase both the divergence and distance between these
+distributions, and as such it is clear that minimising the value of $dt$ is
+optimal. Computationally it is known that the error produced from descritization
+increases by $O(dt)$ for each time interval \autocite{brette_simulation_2007}.
 
-
-% \subsection{Spike refractory periods}
-
-% While the previously defined LIF neurons are sufficient for 
+Using Kulbach-Leibler divergence and Earth Movers' Distance to compare potential
+distributions is not without drawbacks, and these are discussed in further depth
+below.
 
 \subsection{Synapse mechanics}
 
@@ -116,9 +124,10 @@ Synapses between neurons effectively function as a gate, where the current that
 passes through the gate decreases exponentially as time passes without any
 pre-synaptic spikes. In general this relationship can be approximated by the
 equation \ref{eq:Presynaptic1}, where the current across the synapse at a given
-point is the product of the conductivity of the synapse channel $g_{syn}$ and
-the reversal potential $E_{syn}$. As we are dealing solely with excitatory
-synapses in this model, we can assume $E_{syn} = 0$.
+time is the product of the conductivity of the synapse channel $g_{syn}$ and the
+reversal potential $E_{syn}$. As a simplification in implementation, this
+simulation will deal solely with excitatory synapses, so it can be assumed that
+$E_{syn} = 0$.
 
 \begin{myequation}\label{eq:Presynaptic1}
     I_{syn}(t) = g_{syn}(t-t^f_{pre}-t_{del})\cdot(v-E_{syn})
@@ -127,45 +136,108 @@ synapses in this model, we can assume $E_{syn} = 0$.
 The complexity of $g_{syn}$ can be different depending on the intent of the
 simulation. For this model it is necessary to implement basic synaptic
 functionality, in particular, the delay $t_{del}$ between between the firing
-time of a pre-synaptic neuron $t^f_{pre}$ and the point at which the channel
-conductivity reacts to the spike. The conductance of the synaptic channel should
+time of a pre-synaptic neuron $t^f_{pre}$, and the time $t$ at which the channel
+conductivity first reacts to the spike, $t^f_{pre} + t_{del} = t$. The conductance of the synaptic channel should
 also reduce exponentially after a spike has occurred. A simple formula that
 meets these requirements is shown in equation \ref{eq:Presynaptic2}, where only
 the most recent pre-synaptic firing time $t^f_{pre}$ is taken into account.
-$\tau_s$ is the time constant of the synaptic channel. A greater value of
+$\tau_s$ is the time constant of the synaptic channel, where a greater value of
 $\tau_s$ increases the time taken for the conductivity to slope off. More
 complex models may also specify a resistance or charge associated with the
-synapse. 
+synapse.
 
 \begin{myequation}\label{eq:Presynaptic2}
-    g_{syn}(x) = 
+    g_{syn}(x) =
     \begin{cases}
-        0 & x < 0 \\
+        0                       & x < 0  \\
         e^{-(\frac{x}{\tau_s})} & x >= 0
     \end{cases}
 \end{myequation}
 
+I found, however, that in implementation there were a few quirks to note. As
+many pre-synaptic spikes may occur within the firing time of a post synaptic
+spike, simply taking into account the latest spike caused inconsistencies in the
+input current on the post synaptic neuron. This effect is illustrated in figure
+\ref{fig:LIFDUALBUG}, where the potential over the post-synaptic neuron
+$Vm_{post}$ drops sharply when the pre-synaptic neuron spikes. This requires a
+slight adjustment to equation \ref{eq:Presynaptic1} such that the current
+$I_{syn}(t)$ is a function of multiple pre-synaptic spike times. This fix is
+present in equation \ref{eq:presynapticfix}.
 
+% \scalebox{1.5}
+\begin{equation}\label{eq:presynapticfix}
+    \scalebox{1.5}{$
+        I_{syn}(t) = \sum_{t^f_{pre}} g_{syn}(t-t^f_{pre}-t_{del})\cdot(v-E_{syn})
+    $}\end{equation}
+\vspace{1ex}
 
-\begin{figure}[h!]
-    \addtolength{\leftskip} {-2.5cm}
-    \addtolength{\rightskip}{-2.5cm}
-    \begin{subfigure}{.65\textwidth}
-        \centering
-        \includegraphics[width=1\linewidth]{figures/graphs/twospikingneuronsnodelay.eps}
-        \caption{$t_{del} = 0ms$}
-        \label{fig:LIFDUAL0DEL}
-    \end{subfigure}%
-    \begin{subfigure}{.65\textwidth}
-        \centering
-        \includegraphics[width=1\linewidth]{figures/graphs/twospikingneuronsdelay.eps}
-        \caption{$t_{del} = 5ms$}
-        \label{fig:LIFDUALBUGDEL}
-    \end{subfigure}
-    \caption{Two neurons in series}
-    \label{fig:LIFDUAL}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.5\linewidth]{figures/graphs/bugZoomed.eps}
+    \caption{Input current is only calculated from $t^f_{pre}$}
+    \label{fig:LIFDUALBUG}
 \end{figure}
 
 
+% \begin{figure}[h!]
+%     \addtolength{\leftskip} {-2.5cm}
+%     \addtolength{\rightskip}{-2.5cm}
+%     \begin{subfigure}{.65\textwidth}
+%         \centering
+%         \includegraphics[width=0.6\linewidth]{figures/graphs/bugZoomed.eps}
+%         \caption{$t_{del} = 0ms$}
+%         \label{fig:LIFDUAL0DEL}
+%     \end{subfigure}%
+%     \begin{subfigure}{.65\textwidth}
+%         \centering
+%         \includegraphics[width=0.6\linewidth]{figures/graphs/bugfixzoom.eps}
+%         \caption{$t_{del} = 5ms$}
+%         \label{fig:LIFDUALBUGDEL}
+%     \end{subfigure}
+%     \caption{Two neurons in series}
+%     \label{fig:LIFDUAL}
+% \end{figure}
+
+
 \subsection{STDP}
+
+The simulation model described so far has been relatively static once
+constructed; other than changes in membrane potential, neural parameters are not
+changing, nor are the relationships between nuerons. However, in biological
+networks, neurons adapt their relationships over time in reaction to new
+environments or long term changes, in a process called Hebbian Learning
+\autocite{trappenberg_fundamentals_2009}. This process can be replicated in a
+spiking neural network through adding a vector of weights to each neuron that
+determines the relative connection strength of each pre synaptic input. These
+weights will change over time according to the observed correlation between
+pre-synaptic and post-synaptic spikes, forming Spike-Time Dependent Placticity
+(STDP) \autocite{iakymchuk_simplified_2015}.
+
+The basic form of STDP is simple; given a synaptic weight between neurons
+$w_{ij}$, the weight changes at each time interval by $dw$, a function of
+$t^f_{post} - t^f_{pre}$. A function that provides these heuristics is defined
+in equation \ref{eq:stdpdw}, where $\delta t$ is $t^f_{post} - t^f_{pre}$.
+
+\begin{myequation}\label{eq:stdpdw}
+    dw(\delta t) =
+    \begin{cases}
+        A^-\cdot e^{(\frac{\delta t}{\tau^-})} & \delta t < 0 \\
+        A^+\cdot e^{(\frac{\delta t}{\tau^+})} & \delta t > 0 \\
+        0                                      & \delta t = 0
+    \end{cases}
+\end{myequation}
+
+While STDP could be implemented in a sense by defining the new weight as $w_{ij} =
+    w_{ij} + dw$, this is not desirable as unbounded weights will eventually tend
+towards infinity or 0. However, simply clamping the weight between a maximum and minimum
+is not an faithful recreation of hebbian learning either. Ideally, weight
+changes become "harder" to achieve the closer the weight is to its boundary.
+
+\begin{myequation}\label{eq:stdpdw}
+    \delta w(\delta t) =
+    \begin{cases}
+        dw(\delta t) \cdot (w_{ijMAX} - w_{ij}) & dw >= 0 \\
+        dw(\delta t) \cdot (w_{ij}- w_{ijMIN})  & dw < 0
+    \end{cases}
+\end{myequation}
 

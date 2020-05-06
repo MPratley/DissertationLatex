@@ -176,8 +176,8 @@ present in equation \ref{eq:presynapticfix}.
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.5\linewidth]{figures/graphs/bugZoomed.eps}
-    \caption{Input current is only calculated from $t^f_{pre}$}
+    \includegraphics[width=0.6\linewidth]{figures/graphs/bugZoomed.eps}
+    \caption[Graph of a bug in the initial implementation of synaptic channels]{A zoomed-in graph, depicting a bug in the initial implementation of synaptic channels that causes the potential over the post-synaptic neuron (orange) to drop suddenly after a pre-synaptic spike (blue), instead of an expected smooth decrease.}
     \label{fig:LIFDUALBUG}
 \end{figure}
 
@@ -219,9 +219,9 @@ pre-synaptic and post-synaptic spikes, forming Spike-Time Dependent Plasticity
 The basic form of STDP is simple; given a synaptic weight between neurons,
 $w_{ij}$, the weight changes at each time interval by $dw$, a function of
 $t^f_{post} - t^f_{pre}$. A function that provides these heuristics is defined
-in equation \ref{eq:stdpdw}, where $\delta t$ is $t^f_{post} - t^f_{pre}$. $A^+$
-and $A^-$ are constants that, along with $\tau^\pm$ can be used to adjust the
-potentiation and depression rates in the synapse.
+in equation \ref{eq:stdpdw}, where $\delta t$ is typically $t^f_{post} -
+t^f_{pre}$. $A^+$ and $A^-$ are constants that, along with $\tau^\pm$ can be
+used to adjust the potentiation and depression rates in the synapse.
 
 \begin{myequation}\label{eq:stdpdw}
     dw(\delta t) =

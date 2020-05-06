@@ -26,55 +26,93 @@ simulate and modify loop that experimentation can take place.
 
 In order to make the simulation as extensible as possible, I have chosen to
 implement it in an object oriented manner, where functionality of the components
-in a the neural network is compartmentalised to the objects that should own said
-functionality. For instance, each neuron holds its state, and state history, and
+in the network is compartmentalised to the objects that should own said
+functionality. For instance, each neuron owns its own state, state history, and
 the functions that modify that state.
 
 Another significant advantage of using object oriented programming in Python is
-that objects can be deeply cloned using Python's \texttt{copy} library, a significant benefit when it comes to
-duplicating networks. 
+that objects can be deeply cloned using Python's \texttt{copy} library, a
+significant benefit when it comes to duplicating networks for comparative
+purposes.
 
 \begin{figure}[h!]
     \centering
-    % \addtolength{\leftskip} {-4cm}
-    % \addtolength{\rightskip}{-4cm}
+    % \addtolength{\leftskip} {-4cm} \addtolength{\rightskip}{-4cm}
     \includegraphics[width=0.5\linewidth]{figures/images/UML2.png}
-    \caption{UML Diagram}
+    \caption[UML Diagram of objects in the simulation]{A UML Diagram of the
+    objects in the simulation, where a Simulation class is composed of many
+    AbstractNeurons and Synapses, and Neurons are implemented by multiple
+    sub-classes.}
     \label{fig:uml}
 \end{figure}
 
 On a basic level, the hierarchy within the simulation is as follows: All neurons
 and synapses belong to a Simulation object, and the neurons in the network are
 doubly-linked with synapses in-between. This is illustrated in figure
-\ref{fig:uml}. Neurons have been split into a base class \texttt{AbstractNeuron}
+\ref{fig:uml}, where neurons have been split into a base class \texttt{AbstractNeuron}
 that holds the vector of input synapses and presents an interface to get the
 neuron potential, but the specific implementation details are left to
 \texttt{AbstractNeuron}'s implementations. One of these implementations is the
-LIF neuron described earlier in this chapter, and the other is
-\texttt{NoisySine}, a Neuron that uses overlapping sine-waves to generate an
-output current. 
+\texttt{LIFNeuron} neuron described earlier in this chapter, and the other is
+\texttt{NoisySineNeuron}, a Neuron that uses overlapping sine-waves to generate an
+output current. The core benefit of the these abstractions is
+flexibility in the precise implementation of neurons. However, abstractions have
+only been provided where necessary, as needless abstraction simply increases
+system complexity and development time \autocite{shaw_abstraction_1984}.
 
 \subsection{Network Topology}
 
 In order to model the passing of information through the simulation, there were
-several approaches that I could take. In order to pick a solution, it is
-necessary to map out the relationships between neurons in some sample topologies
-and the features that need to be supported by the synapses in such topologies.
+several approaches that could be taken. In order to pick a solution, it is
+necessary to map out the relationships between neurons in some sample topologies,
+and the features that need to be supported by the synapses in such topologies. 
+
+\begin{figure}[h!]
+    \begin{subfigure}{1\textwidth}
+        \centering
+        \includegraphics[width=0.35\linewidth]{figures/tops/top1.png}
+        \caption{Neurons are connected in series, each neuron has 1 or fewer inputs}
+        \label{fig:top1}
+    \end{subfigure} \vspace{1ex} \\ 
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[width=0.7\linewidth]{figures/tops/top2.png}
+        \caption{Neurons may have multiple synaptic inputs}
+        \label{fig:top2}
+    \end{subfigure}
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[width=0.7\linewidth]{figures/tops/top3.png}
+        \caption{Multiple synapses may share a pre-synaptic neuron. "Recursive" feedback loops are found in the network.}
+        \label{fig:top3}
+    \end{subfigure}
+    \caption[Sample network topologies for simulation]{Three sample network topologies for simulation. Numbered circles are spiking neurons, while waves mark an abstract input. Arrows between circles are synaptic connections.}
+    \label{fig:tops}
+\end{figure}
+
+In figure \ref{fig:tops}, EXPLAIN REQUIREMENTS OF EACH LAYOUT
 
 \subsubsection{Stochastic generation of networks}
 
-When creating large networks of neurons, it is simpler to organise them in
-groups that are generated with random variables, and to stochastically link
-neuron groups with synapse groups. 
+In order to create large networks with complex and varied parameters, it is
+desirable to have functionality that can stochastically generate groups of
+neurons. To support this, a wrapper class \texttt{NeuronGroup} has been written
+that can create an arbitrary number of neurons, with each individual neuron
+parameter drawn from a user provided distribution. Neuron groups can then be
+probabilistically connected with synapses between their constituent neurons,
+using the \texttt{SynapseGroup} helper class. These helper classes are not
+involved in the actual running of the simulation, so advanced network set-ups
+can still be manually created if an experiment requires.
 
-\subsubsection{Function parameters instead of static parameters}
+\subsubsection{Using callable parameters}
 
-It is desirable to make the parameters that define the random distribution in a group
-generation function be configurable at runtime, but increasing the number of
-parameters in a function signature increases the mental overhead when a programmer is
-using an API [CITE THIS]. 
-
-However,
-this can be simplified even further by passing a single PYTHON CALLABLE, which
-in practice is a closure that encapsulates a function that produces a
-distribution of the user's choice. 
+To provide an extra layer of flexibility in network setup, both
+\texttt{NeuronGroup} and \texttt{SynapseGroup} take Python \texttt{Callable}
+objects as parameters, where the callable is a function closure that returns a
+sample from a distribution. As closures are functions that hold their
+environment outside of their scope, this allows for lazily sampling from a
+persistent distribution of the simulation user's choice on demand, for any
+number of samples. Another advantage of this system is that the API surface of
+the group wrapper classes is significantly reduced, which is beneficial as the
+mental overhead of using large APIs has been shown to decrease programmer
+performance \autocite{ellis_factory_2007,omar_active_2012}.

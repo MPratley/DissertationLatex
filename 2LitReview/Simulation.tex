@@ -21,19 +21,20 @@ individual components of a simulated network, the two predominant choices are
 between a clock driven model and an event driven model. In a clock driven model,
 continuous time is split into discrete chunks, and it is the size of these
 chunks that determine the accuracy of the differential equations that define
-neuronal behaviour. Meanwhile, an event driven model asynchronous in nature, as
-neurons will only update on events, where these events are typically spikes or
-learning updates that propagate backwards. The advantage of a clock driven model
-is its flexibility in using any differential equation, however, more complex
-neuron models require a smaller time step leading to large computation times. An
-event driven model, by comparison, computes in real time and spikes are
-therefore unaffected by rounding errors from discretization
+neuronal behaviour. Meanwhile, an event driven model is asynchronous in nature,
+where events such as spikes or learning updates that propagate backwards will
+trigger further updates across the network. The advantage of a clock driven
+model is its flexibility in using any differential equation, however, more
+complex neuron models require a smaller time step leading to large computation
+times. An event driven model, by comparison, computes in real time and spikes
+are therefore unaffected by rounding errors from discretization
 \autocite{brette_simulation_2007}. It is also possible to simulate population
 dynamics to describe the average activity of neuronal populations
 \autocite{trappenberg_fundamentals_2009}, which is ideal for modelling neuronal
 populations that are on the scale of actual nervous systems with modern
 computational power. The downside to this, however, is that such generalised
-models are not always faithful approximations of true network effects between neurons.
+models are not always faithful approximations of true network effects between
+neurons.
 
 \subsection{Available neural simulation and modelling software packages}
 
@@ -58,7 +59,13 @@ the observed causality of pre-synaptic spikes on post-synaptic spikes
 \autocite{thornton_virtual_2019}. Details on how this may be implemented and
 used are covered further in Chapter 3.
 
-\begin{figure}[h]
+VERTEX itself is multithreaded, and makes use of the compute pooling feature in
+MATLAB to separate groups of tasks into separate logical threads. This means
+that, with a sufficiently large model, doubling the number of available workers
+in the pool nearly halves the time taken to simulate, as shown in figure
+\ref{VERTEXparallel} below.
+
+\begin{figure}[h!]
     \centering
     \includegraphics{figures/graphs/coresVERTEX.png}
     \DoubleCaption{Impact of parralel computation on
@@ -66,12 +73,6 @@ used are covered further in Chapter 3.
     \label{VERTEXparallel}
 \end{figure}
 \vspace{1ex}
-
-VERTEX itself is multithreaded, and makes use of the compute pooling feature in
-MATLAB to separate groups of tasks into separate logical threads. This means
-that, with a sufficiently large model, doubling the number of available workers
-in the pool nearly halves the time taken to simulate, as shown in figure
-\ref{VERTEXparallel} above.
 
 \subsubsection{NEURON}
 

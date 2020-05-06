@@ -1,7 +1,9 @@
 \section{Modelling mathematics}
 
+This paragraph sucks and needs fixing or removing: \\
 In order to program a neural network, it is necessary to first enumerate the
-differential equations that describe constituent neurons of a network. A neuron
+differential equations that describe constituent neurons of a network, and the
+rules that govern the interactions between them. A neuron
 state at a given time is typically defined by a collection of differential
 equations, where spikes are occur as a response to changes in this state \autocite{brette_simulation_2007}. In the
 following section I will define and justify the behaviour of these neurons.
@@ -9,8 +11,9 @@ following section I will define and justify the behaviour of these neurons.
 \subsection{Leaky Integrate and Fire}
 
 The simplest approximation of a spiking neuron that retains the chemical
-behaviour of a biological action potential are Leaky Integrate and Fire (LIF) neurons. As any neuron is, in effect, a
-signal processing unit, they can be modelled as a circuit.
+behaviour of a biological action potential are Leaky Integrate and Fire (LIF)
+neurons. As any neuron is, in effect, a signal processing unit, they can be
+modelled as a circuit.
 
 \begin{figure}[h!]
     \begin{subfigure}{.5\textwidth}
@@ -203,41 +206,71 @@ present in equation \ref{eq:presynapticfix}.
 
 The simulation model described so far has been relatively static once
 constructed; other than changes in membrane potential, neural parameters are not
-changing, nor are the relationships between nuerons. However, in biological
+changing, nor are the relationships between neurons. However, in biological
 networks, neurons adapt their relationships over time in reaction to new
 environments or long term changes, in a process called Hebbian Learning
 \autocite{trappenberg_fundamentals_2009}. This process can be replicated in a
 spiking neural network through adding a vector of weights to each neuron that
 determines the relative connection strength of each pre synaptic input. These
 weights will change over time according to the observed correlation between
-pre-synaptic and post-synaptic spikes, forming Spike-Time Dependent Placticity
+pre-synaptic and post-synaptic spikes, forming Spike-Time Dependent Plasticity
 (STDP) \autocite{iakymchuk_simplified_2015}.
 
-The basic form of STDP is simple; given a synaptic weight between neurons
+The basic form of STDP is simple; given a synaptic weight between neurons,
 $w_{ij}$, the weight changes at each time interval by $dw$, a function of
 $t^f_{post} - t^f_{pre}$. A function that provides these heuristics is defined
-in equation \ref{eq:stdpdw}, where $\delta t$ is $t^f_{post} - t^f_{pre}$.
+in equation \ref{eq:stdpdw}, where $\delta t$ is $t^f_{post} - t^f_{pre}$. $A^+$
+and $A^-$ are constants that, along with $\tau^\pm$ can be used to adjust the
+potentiation and depression rates in the synapse.
 
 \begin{myequation}\label{eq:stdpdw}
     dw(\delta t) =
     \begin{cases}
-        A^-\cdot e^{(\frac{\delta t}{\tau^-})} & \delta t < 0 \\
+        A^-\cdot e^{(\frac{\delta t}{\tau^-})} & \delta t < 0 \\ 
         A^+\cdot e^{(\frac{\delta t}{\tau^+})} & \delta t > 0 \\
         0                                      & \delta t = 0
     \end{cases}
 \end{myequation}
 
-While STDP could be implemented in a sense by defining the new weight as $w_{ij} =
-    w_{ij} + dw$, this is not desirable as unbounded weights will eventually tend
-towards infinity or 0. However, simply clamping the weight between a maximum and minimum
-is not an faithful recreation of hebbian learning either. Ideally, weight
-changes become "harder" to achieve the closer the weight is to its boundary.
+While STDP could be implemented in a sense by defining the new synaptic weight
+    as $w_{ij} = w_{ij} + dw$, this is not desirable as unbounded weights will
+    eventually tend towards infinity or 0. However simply clamping the weight
+    between a maximum and minimum is not an faithful recreation of hebbian
+    learning either. Ideally, weight changes towards a boundary become "harder"
+    to achieve the closer the weight is to the boundary. This can be achieved by
+    defining a minimum and maximum weight, and using it to balance the magnitude
+    of the weight change, as seen in equation \ref{eq:stdpdelw}.
+    
 
-\begin{myequation}\label{eq:stdpdw}
+\begin{myequation}\label{eq:stdpdelw}
     \delta w(\delta t) =
     \begin{cases}
         dw(\delta t) \cdot (w_{ijMAX} - w_{ij}) & dw >= 0 \\
         dw(\delta t) \cdot (w_{ij}- w_{ijMIN})  & dw < 0
     \end{cases}
 \end{myequation}
+
+One final consideration to be made is the "learning process", that is, how and
+when the system determines the correct values for synaptic weights and
+stabilises. There are two main approaches, an unsupervised or supervised model.
+In a supervised model, the network will process some test inputs with a known
+output state, and the system modifies itself by comparison to this correct
+state. By contrast, in an unsupervised model the system adjusts weights in
+reaction to input data as it arrives, attempting to find a stable equilibrium
+where weights shift minimally with each adjustment [CITE SOMETHING]. As the
+simulation being designed will use probabilistic noisy inputs with no known
+correct network state, an unsupervised weight update model is desirable. In
+order to achieve this, synaptic inputs to a given neuron will need to compete
+such that the increases potentiation across one synapse decreases the influence
+of competing synapses. Without this competitive model, the system is unlikely to
+stabilise [CITE]. This can be achieved by dividing each weight by the sum of all
+the weights in the input vector of a given neuron. This is shown in equation
+\ref{eq:competitive}, where $I_j$ is the input current on post synaptic neuron
+$j$, itself the sum of all the weighted and normalized synaptic currents
+$I_{ij}$.
+
+\begin{equation}
+    \label{eq:competitive}
+    I_j(t) = \sum_{i}\frac{w_{ij} \cdot I_{ij}(t)}{\sum_{i}w_{ij}}
+\end{equation}
 

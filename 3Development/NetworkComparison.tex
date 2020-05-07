@@ -12,7 +12,7 @@ Due to the descritization of time required in clock based simulation, spikes at
 each neuron are aligned to a "grid" of sorts. Therefore, given two binary
 vectors holding the spiking state of two neurons, $S_{arr}$ and $S^\prime_{arr}$, the bit at a given index $i$ represents
 the spike state at the same discrete point in simulation time in either vector.
-With this in mind, it is therefore possible to calculate the the number of bits
+With this in mind, it is therefore possible to calculate the number of bits
 that must be flipped in $V_{arr}$ for it to contain the same sequence of bits as
 $V^\prime_{arr}$. The resulting number is the Hamming Distance. While the
 Hamming distance can be used to observe the change in spiking pattern between

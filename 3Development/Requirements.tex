@@ -6,15 +6,15 @@
 
 While there are many different levels and methods of emulation possible in the
 field of computational neuroscience, for the purposes of this dissertation, a
-spiking neural network is an appropriate level of simulation, such that changes
-that are approximate to measurement error can be inserted into the simulation.
-It is, however, not necessary to precisely emulate the chemical processes that
-take place within the biological nervous system, and these processes may be
-mathematically approximated.
+spiking neural network is an appropriate level of simulation, such that network
+changes that mimic measurement error in the brain scanning process can be
+inserted into the simulation. It is, however, not necessary to precisely emulate
+the chemical processes that take place within the biological nervous system, and
+these processes may be mathematically approximated.
 
 The following are the requirements that should be met by simulation software
 that is suitable for research into the effect of measurement error on brain
-emulation.
+simulation.
 
 \begin{itemize}
     \item \textbf{Use a clock-driven, discretization based approach for simulation.} The relative time of
@@ -34,8 +34,8 @@ emulation.
           % dissertation. Refer to the table of emulation layers in lit review.
           % TEMP
 
-    \item \textbf{Support stochastic noisy inputs.} Inputs into biological
-          networks are not clean or sanitized, and there is level of random noise
+    \item \textbf{Support stochastic noisy input signals.} Inputs into biological
+          networks are not clean or sanitised, and there is a level of random noise
           present in them that should be simulated. Random noise in repeated
           experiments makes averages more meaningful and aids in finding reliable results.
 
@@ -45,15 +45,17 @@ emulation.
           reliance on modifying the simulation's internal source code.
 
     \item \textbf{Networks should be duplicable using standard Python
-              techniques.} Once networks have been set up, simulated and modified,
-          duplicating a network and its state should be supported by the standard
-          Python \texttt{deepcopy} procedure.
+              techniques.} Once networks have been set up, simulated and
+              modified, duplicating a network and its state should be supported
+              by the standard Python \texttt{deepcopy} procedure, producing a
+              full copy of the network with a fully independent state from the
+              original.
 
     \item \textbf{Experiments performed with the simulation must be repeatable.}
           The results of experiments performed with the simulation must be
           repeatable so they may be verified and their integrity upheld.
-          Combined with stochastic inputs to a network, these stochastic inputs
-          must be easily seed-able to produce deterministic results if required.
+          TODO fix shit sentence Combined with stochastic inputs to a network, these stochastic inputs
+          must be easily seedable to produce deterministic results if required.
 
           %     \item \textbf{Should be easy to define large groups of neurons with individual parameters drawn from probability distributions}
           %     \item \textbf{Should be capable of probabilistically creating synapses between neuron groups}

@@ -1,12 +1,12 @@
 \section{Modelling mathematics}
 
-\textsc{This paragraph sucks and needs fixing or removing:} \\
 In order to program a neural network, it is necessary to first enumerate the
 differential equations that describe constituent neurons of a network, and the
-rules that govern the interactions between them. A neuron
-state at a given time is typically defined by a collection of differential
-equations, where spikes are occur as a response to changes in this state \autocite{brette_simulation_2007}. In the
-following section I will define and justify the behaviour of these neurons.
+rules that govern the interactions between them. A neuron state at a given time
+is typically defined by a collection of differential equations, where spikes
+occur as a response to changes in this state \autocite{brette_simulation_2007}.
+In the following section I will define and justify the behaviour of these
+neurons.
 
 \subsection{Leaky Integrate and Fire}
 
@@ -44,8 +44,8 @@ We can arrange the formulae for current and capacitance to find the membrane
 potential $v(t)$ at time $t$. The input current $I(t)$ is split between the two
 components of the circuit, and as such can be calculated by summing the current
 over them, $I(t) = I_R + I_C$. This is shown in figure \ref{fig:LIFSchemB}.
-Through Ohm's law, $I_R = \frac{v(t)}{R}$, while from the definition of capacity,
-the current on the capacitor is found as
+Through Ohm's law, $I_R = \frac{v(t)}{R}$, while from the definition of capacity in a circuit,
+the current on the capacitor can be found as
 $I_C = C \frac{d v(t)}{d t}$ \autocite{gerstner_spiking_2002}.
 
 \begin{myequation}\label{eq:IF_Itpre}
@@ -67,10 +67,10 @@ give the standard form for an IF neuron, equation \ref{eq:IF_SF}. \autocite{burk
 \end{myequation}
 
 A simple Python implementation of this equation simulated for 100ms and a graph
-of its output are shown in figure \ref{fig:LIFSingleSpikeGraphCode}. The code is roughly based on example MATLAB code from \autocite[table
-    3.1]{trappenberg_fundamentals_2009} rewritten in idiomatic python. The
+of its output are shown in figure \ref{fig:LIFSingleSpikeGraphCode}. The code is based on an example MATLAB program from \autocite[table
+    3.1]{trappenberg_fundamentals_2009} rewritten in idiomatic Python. The
 parameters of this loop are arbitrary, and the simulation is fully deterministic
-as $I(t)$ is a constant input.
+as $I(t)$ is a constant non-random input.
 
 \begin{figure}[h!]
     \begin{subfigure}{.6\textwidth}
@@ -91,6 +91,13 @@ as $I(t)$ is a constant input.
 
 \subsection{Descritization}
 
+Simulating a neuron computationally requires integrating its component
+differential equations with respect to time. This can be achieved by defining a
+suitably small time-step $dt$ with which to perform descritization. While the
+simulation in figure \ref{fig:LIFSingleSpikeGraphCode} above used $dt = 0.1_{ms}$,
+this was a fairly arbitrary value and it is worth evaluating the relative
+accuracy of different $dt$ values. 
+
 \begin{figure}[h!]
     \centering
     \addtolength{\leftskip} {-3cm}
@@ -100,22 +107,21 @@ as $I(t)$ is a constant input.
     \label{fig:entropyofdt}
 \end{figure}
 
-Simulating a neuron computationally requires integrating its component
-differential equations with respect to time. This can be achieved by defining a
-suitably small time-step $dt$ with which to perform descritization. While the
-simulation in figure \ref{fig:LIFSingleSpikeGraphCode} above used $dt = 0.1$,
-this was a fairly arbitrary value and it's worth evaluating the relative
-accuracy of different $dt$ values. Figure \ref{fig:entropyofdt} compares the
+\FloatBarrier
+
+Figure \ref{fig:entropyofdt} compares the
 error produced with different values of $dt$. To
 produce this, a distribution $N_{dt}$ of the potential $Vm$ over a single neuron
-was created for each value of $dt$, with all other parameters kept equal, and those distributions compared to the
-baseline distribution $N_{dt=0.001}$. The comparison of these distributions was
-performed by measuring the relative entropy (Kulbach-Leibler divergence) and
-Earth Movers' Distance between them. Increasing the value of $dt$ can be seen to
-exponentially increase both the divergence and distance between these
-distributions, and as such it is clear that minimising the value of $dt$ is
-optimal. Computationally it is known that the error produced from descritization
-increases by $O(dt)$ for each time interval \autocite{brette_simulation_2007}.
+was created for each value of $dt$, with all other parameters kept equal, and
+those distributions compared to the baseline distribution $N_{dt=0.001}$. The
+comparison of these distributions was performed by measuring the relative
+entropy (Kulbach-Leibler divergence) and Earth Movers' Distance between them.
+These methods of comparing distributions are described and evaluated in TODO
+REF. Increasing the value of $dt$ can be seen to exponentially increase both the
+divergence and distance between these distributions, and as such it is clear
+that minimising the value of $dt$ is optimal. Computationally it is known that
+the error produced from descritization increases by $O(dt)$ for each time
+interval \autocite{brette_simulation_2007}.
 
 Using Kulbach-Leibler divergence and Earth Movers' Distance to compare potential
 distributions is not without drawbacks, and these are discussed in further depth
@@ -138,7 +144,7 @@ $E_{syn} = 0$.
 
 The complexity of $g_{syn}$ can be different depending on the intent of the
 simulation. For this model it is necessary to implement basic synaptic
-functionality, in particular, the delay $t_{del}$ between between the firing
+functionality, in particular, the delay $t_{del}$ between the firing
 time of a pre-synaptic neuron $t^f_{pre}$, and the time $t$ at which the channel
 conductivity first reacts to the spike, $t^f_{pre} + t_{del} = t$. The conductance of the synaptic channel should
 also reduce exponentially after a spike has occurred. A simple formula that
@@ -235,8 +241,8 @@ used to adjust the potentiation and depression rates in the synapse.
 While STDP could be implemented in a sense by defining the new synaptic weight
     as $w_{ij} = w_{ij} + dw$, this is not desirable as unbounded weights will
     eventually tend towards infinity or 0. However simply clamping the weight
-    between a maximum and minimum is not an faithful recreation of hebbian
-    learning either. Ideally, weight changes towards a boundary become "harder"
+    between a maximum and minimum is not a faithful recreation of Hebbian
+    Learning either. Ideally, weight changes towards a boundary become "harder"
     to achieve the closer the weight is to the boundary. This can be achieved by
     defining a minimum and maximum weight, and using it to balance the magnitude
     of the weight change, as seen in equation \ref{eq:stdpdelw}.
@@ -257,16 +263,16 @@ In a supervised model, the network will process some test inputs with a known
 output state, and the system modifies itself by comparison to this correct
 state. By contrast, in an unsupervised model the system adjusts weights in
 reaction to input data as it arrives, attempting to find a stable equilibrium
-where weights shift minimally with each adjustment [CITE SOMETHING]. As the
+where weights shift minimally with each adjustment [TODO CITE SOMETHING]. As the
 simulation being designed will use probabilistic noisy inputs with no known
 correct network state, an unsupervised weight update model is desirable. In
 order to achieve this, synaptic inputs to a given neuron will need to compete
-such that the increases potentiation across one synapse decreases the influence
+such that the increased potentiation across one synapse decreases the influence
 of competing synapses. Without this competitive model, the system is unlikely to
-stabilise [CITE]. This can be achieved by dividing each weight by the sum of all
-the weights in the input vector of a given neuron. This is shown in equation
-\ref{eq:competitive}, where $I_j$ is the input current on post synaptic neuron
-$j$, itself the sum of all the weighted and normalized synaptic currents
+stabilise [TODO CITE]. This can be achieved by dividing each weight by the sum
+of all the weights in the input vector of a given neuron. This is shown in
+equation \ref{eq:competitive}, where $I_j$ is the input current on post synaptic
+neuron $j$, itself the sum of all the weighted and normalised synaptic currents
 $I_{ij}$.
 
 \begin{myequation}

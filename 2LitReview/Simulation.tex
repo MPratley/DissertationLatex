@@ -21,7 +21,7 @@ individual components of a simulated network, the two predominant choices are
 between a clock driven model and an event driven model. In a clock driven model,
 continuous time is split into discrete chunks, and it is the size of these
 chunks that determine the accuracy of the differential equations that define
-neuronal behaviour. Meanwhile, an event driven model is asynchronous in nature,
+neuronal behaviour. Conversely, an event driven model is asynchronous in nature,
 where events such as spikes or learning updates that propagate backwards will
 trigger further updates across the network. The advantage of a clock driven
 model is its flexibility in using any differential equation, however, more
@@ -57,7 +57,7 @@ notable of which for the purposes of this project is Spike Time Dependent
 Plasticity (STDP), which dynamically adapts the weighting of synapses based on
 the observed causality of pre-synaptic spikes on post-synaptic spikes
 \autocite{thornton_virtual_2019}. Details on how this may be implemented and
-used are covered further in Chapter 3.
+used are covered further in Chapter 3. % TODO ref
 
 VERTEX itself is multithreaded, and makes use of the compute pooling feature in
 MATLAB to separate groups of tasks into separate logical threads. This means
@@ -68,11 +68,13 @@ in the pool nearly halves the time taken to simulate, as shown in figure
 \begin{figure}[h!]
     \centering
     \includegraphics{figures/graphs/coresVERTEX.png}
-    \DoubleCaption{Impact of parralel computation on
-        simulation performance in VERTEX} {\small{\cite{tomsett_virtual_2015}}}
+    \DoubleCaption{Impact of parallel computation on
+        simulation performance in VERTEX} {\small{Reproduced from \cite{tomsett_virtual_2015}}}
     \label{VERTEXparallel}
 \end{figure}
 \vspace{1ex}
+
+\FloatBarrier
 
 \subsubsection{NEURON}
 
@@ -98,30 +100,30 @@ resources still holds.
 
 "Brian" is another simulator for spiking neural networks, distributed as a
 Python library. Brian offers a unique programming interface whereby the
-differential equations that define a Neuron can be written in plain-text and are
-interpreted at runtime. Provided the equation can be interpreted, this approach
-makes computing mathematical models extremely simple, and is ideal for quickly
-testing variations of a model \autocite{stimberg_brian_2019}. This is, however,
-less useful for more complex relationships between neurons where the plain-text
-mathematical syntax develops its own API on top of the Python API. Fortunately
-users of the library may provide native Python functions to define the behaviour
-of their neurons if desired \autocite{noauthor_functions_2020}. The complexity
-of actual neurons in a Brian simulation is as complex as a programmer intends it
-to be: Neurons can be placed in physical space if desired, but this is optional.
-The time taken to simulate a network is largely dependant on the time complexity
-of the user-defined equations that define the neurons.
+differential equations that define a neuron can be written in plain-text and are
+interpreted at runtime. Provided the equation can be interpreted correctly, this
+approach makes computing mathematical models extremely simple, and is ideal for
+quickly testing variations of a model \autocite{stimberg_brian_2019}. This is,
+however, less useful for more complex relationships between neurons where the
+plain-text mathematical syntax effectively develops its own API on top of the
+Python API. Fortunately users of the library may provide native Python functions
+to define the behaviour of their neurons if desired
+\autocite{noauthor_functions_2020}. Neurons can be placed in physical space if
+desired, but this is optional, and the complexity of actual neurons in a Brian
+simulation is as complex as a programmer intends them to be. As a result, the
+time taken to simulate a network is largely dependant on the time complexity of
+the user-defined equations that define the neurons.
 
 \subsection{Similarities in existing software packages}
 
-Each of the software packages described above is capable of doing simulating a
-network of Neurons, but each has a distinct set of goals. Some, like Brian, are
+Each of the software packages described above is capable of simulating a
+network of neurons, but each has a distinct set of goals. Some, like Brian, are
 intended as tools to study the spiking patterns and features of generic neural
 networks, while VERTEX provides a more specialised tool that is optimised for
 measuring the observed potential changes in a similar manner to capturing
 experimental data. These differences are also seen in the API available to
 developers
 and the distribution methods that each package uses. VERTEX requires that the
-user defines the parameters for Neuron grouping and placement while abstracting
-away the exact definition of the Neuron behaviour, while NEURON and Brian are
-very much focussed on the Neuron definition, and space placement and recording
+user defines the parameters for neuron grouping and placement while abstracting
+away the exact definition of the neuron behaviour, while NEURON and Brian are focussed on the neuron definition, and space placement or recording
 mechanisms are functions largely left to the programmer to define.

@@ -6,13 +6,12 @@
     \addtolength{\leftskip} {-4cm}
     \addtolength{\rightskip}{-4cm}
     \includegraphics[width=1.3\linewidth]{figures/images/workflow.png}
-    \caption{The simulation workflow}
+    \caption{TODO The simulation workflow}
     \label{fig:workflow}
 \end{figure}
 
 In order to flexibly mix object oriented and functional programming paradigms,
-I've chosen to develop these models in the Python programming language. Python
-is home to a healthy and active ecosystem of libraries and development practices
+I've chosen to develop these models in the Python programming language. Python has a healthy and active ecosystem of libraries and development practices
 for scientific and statistical research to draw from. Of particular note are the
 SciPy libraries, which provide a performant set of functions and objects that
 speed up floating point arithmetic and vector mathematics. 
@@ -24,7 +23,7 @@ simulate and modify loop that experimentation can take place.
 
 \subsection{Object oriented neurons}
 
-In order to make the simulation as extensible as possible, I have chosen to
+In order to make the simulation as extendable as possible, I have chosen to
 implement it in an object oriented manner, where functionality of the components
 in the network is compartmentalised to the objects that should own said
 functionality. For instance, each neuron owns its own state, state history, and
@@ -46,15 +45,16 @@ purposes.
     \label{fig:uml}
 \end{figure}
 
-On a basic level, the hierarchy within the simulation is as follows: All neurons
-and synapses belong to a Simulation object, and the neurons in the network are
-doubly-linked with synapses in-between. This is illustrated in figure
+On a basic level, the hierarchy within the simulation is as follows: all neurons
+and synapses belong to a \texttt{Simulation} object, and the neurons in the
+network are doubly-linked with \texttt{Synapse} objects in-between. This is
+illustrated in figure
 \ref{fig:uml}, where neurons have been split into a base class \texttt{AbstractNeuron}
 that holds the vector of input synapses and presents an interface to get the
 neuron potential, but the specific implementation details are left to
 \texttt{AbstractNeuron}'s implementations. One of these implementations is the
-\texttt{LIFNeuron} neuron described earlier in this chapter, and the other is
-\texttt{NoisySineNeuron}, a Neuron that uses overlapping sine-waves to generate an
+\texttt{LIF} neuron described earlier in this chapter, and the other is
+the \texttt{NoisySine} neuron that uses overlapping sine-waves to generate an
 output current. The core benefit of the these abstractions is
 flexibility in the precise implementation of neurons. However, abstractions have
 only been provided where necessary, as needless abstraction simply increases
@@ -66,6 +66,8 @@ In order to model the passing of information through the simulation, there were
 several approaches that could be taken. In order to pick a solution, it is
 necessary to map out the relationships between neurons in some sample topologies,
 and the features that need to be supported by the synapses in such topologies. 
+
+% TODO single file diagrams & quick explanation
 
 \begin{figure}[h!]
     \begin{subfigure}{1\textwidth}
@@ -108,10 +110,9 @@ can still be manually created if an experiment requires.
 
 To provide an extra layer of flexibility in network setup, both
 \texttt{NeuronGroup} and \texttt{SynapseGroup} take Python \texttt{Callable}
-objects as parameters, where the callable is a function closure that returns a
-sample from a distribution. As closures are functions that hold their
-environment outside of their scope, this allows for lazily sampling from a
-persistent distribution of the simulation user's choice on demand, for any
+objects as parameters, where the \texttt{Callable} is a function closure that
+returns a sample from a distribution. As closures are functions that hold their
+environment outside of their scope, this allows for lazily sampling from a distribution of the simulation user's choice on demand, for any
 number of samples. Another advantage of this system is that the API surface of
 the group wrapper classes is significantly reduced, which is beneficial as the
 mental overhead of using large APIs has been shown to decrease programmer

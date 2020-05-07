@@ -1,9 +1,10 @@
-\subsection{Measuring spiking patterns across the network}
+% TODO
+% \subsection{Measuring spiking patterns across the network}
 
--Mark certain neurons as recording
--This can be done as a boolean flag on the neuron to tell it to keep a time
-trace of its potential, or by inserting measurement objects into the simulation.
-These measurement objects can take the form of 
+% -Mark certain neurons as recording
+% -This can be done as a boolean flag on the neuron to tell it to keep a time
+% trace of its potential, or by inserting measurement objects into the simulation.
+% These measurement objects can take the form of 
 
 \section{Comparing spiking patterns between two networks.}
 
@@ -20,23 +21,6 @@ two neurons, it is limited as it does not provide a spatial metric of change
 between two sequences. Another limitation is derived from its simplicity, as
 spiking patterns tell us little about the membrane potential of a neuron leading
 up to a spike.
-
-\begin{figure}[t]
-    \begin{subfigure}{.5\textwidth}
-        \centering
-        \includegraphics[width=1.0\linewidth]{figures/graphs/EMDvsKLclose.eps}
-        \caption{Close distributions}
-        \label{fig:closedist}
-    \end{subfigure}%
-    \begin{subfigure}{.5\textwidth}
-        \centering
-        \includegraphics[width=1.0\linewidth]{figures/graphs/EMDvsKLfar.eps}
-        \caption{Distant distributions}
-        \label{fig:fardist}
-    \end{subfigure}
-    \caption[Comparison between Earth Mover Distance and Kulbach-Leibler Divergence]{Comparison between Earth Movers' Distance and Kulbach-Leibler Divergence on two pairs of distributions with the same integral (area). The closeness of the distributions is reflected in a lower EMD while KL divergence remains the same. EMD is therefore a more intuitive metric to compare distributions.}
-    \label{fig:distributioncompKLEMD}
-\end{figure}
 
 \subsection{Kulbach-Leibler Divergence}
 
@@ -55,6 +39,23 @@ distributions within the sub-figures has no effect on the KL divergence. Also of
 note is that divergence is not a symmetrical metric, so $KL(A, B) \neq KL(B,
 A)$, so any comparisons of KL divergence must ensure that the same divergence is
 being compared.
+
+\begin{figure}[h!]
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[width=1.0\linewidth]{figures/graphs/EMDvsKLclose.eps}
+        \caption{Close distributions}
+        \label{fig:closedist}
+    \end{subfigure}%
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[width=1.0\linewidth]{figures/graphs/EMDvsKLfar.eps}
+        \caption{Distant distributions}
+        \label{fig:fardist}
+    \end{subfigure}
+    \caption[Comparison between Earth Mover Distance and Kulbach-Leibler Divergence]{Comparison between Earth Movers' Distance and Kulbach-Leibler Divergence on two pairs of distributions with the same integral (area). The closeness of the distributions is reflected in a lower EMD while KL divergence remains the same. EMD is therefore a more intuitive metric to compare distributions.}
+    \label{fig:distributioncompKLEMD}
+\end{figure}
 
 \subsection{Earth Mover's Distance (EMD)}
 

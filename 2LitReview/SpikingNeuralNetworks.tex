@@ -32,12 +32,12 @@ nervous system, and are chemically unique in their functioning in the body.
 
 Each neuron acts as a gate of sorts, holding or releasing its potential in
 response to signals as part of a greater network of neurons. This release often
-takes the form of a spike, as seen in figure \ref{neuronalactionpotentialexample}.
+takes the form of a spike, as seen in figure \ref{neuronalactionpotentialexample}, depicting a typical neuronal action potential of a neuron in the nervous system.
 Together, the neurons in these networks perform the signal processing and
 routing that "computes" the many sensory inputs to the nervous system
-\autocite{koch_biophysics_2004}. While not all neurons are spiking neurons, it
+\autocite{koch_biophysics_2004}. While not all neurons are spiking neurons, it %TODO percentage of neurons that are spiking?
 is the properties of spiking neurons and the interactions between them that are
-the focus of this review and ultimately this document.
+the focus of this review and ultimately this dissertation.
 
 \subsection{Hodgkin–Huxley model}
 
@@ -46,17 +46,19 @@ axon that accurately represents both the chemical changes and the form of the
 action potential spike in the axon. \autocite{hodgkin_quantitative_1952}
 
 The strength of the Hodgkin–Huxley model is in its adaptability. Every change in
-a neuron during a spike, be it chemical or physical, can be mapped across, and
-more complex behaviour can be recreated in the model thanks to its basis in the
-core chemistry of a neuron. However, this complexity is not without pitfalls as
-the computational power required to simulate such advanced models is so large,  that it is no longer feasible to simulate in a network.
+a biological neuron during a spike, be it chemical or physical, can be mapped
+across to changes in the Hodgkin–Huxley model, and more complex behaviour
+can be recreated in the model thanks to its basis in the core chemistry of a
+neuron. However, this complexity is not without pitfalls as the computational
+power required to simulate such advanced models is so large,  that it is no
+longer feasible to simulate in within a network.
 
 \subsection{Faster neuron models for large scale computation}
 
 While it can be desirable to accurately model and simulate the chemical
 interactions between individual components of the nervous system, it is
 computationally infeasible to do so on a scale similar to that of a real-world
-system due to the computational complexity of the Hodgkin - Huxley equations.
+system due to the computational complexity of the Hodgkin-Huxley equations.
 Fortunately, as a network becomes larger, the exact mechanisms of its individual
 components can be approximated, and faster activation or threshold functions
 that perform similarly to real ones can be substituted.
@@ -69,7 +71,11 @@ approximation, it is tempting to assume that such a model would prove inaccurate
 for anything more than basic prototypes, however LIF models have been shown to
 replicate spiking patterns of more complex models with a low margin of error,
 provided the models are under natural conditions
-\autocite{teeter_generalized_2018}. This document will go into more detail on
-the equations and implementation of LIF neurons in Chapter 3.
+\autocite{teeter_generalized_2018}. This dissertation will go into more detail on
+the equations and implementation of LIF neurons in Chapter 3. % TODO better ref
 
 \subsection{Hebbian learning and synaptic plasticity}
+
+TODO
+
+These concepts are mathematically expanded on in REFERENCE STDP

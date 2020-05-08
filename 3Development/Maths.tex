@@ -115,7 +115,7 @@ produce this, a distribution $N_{dt}$ of the potential $Vm$ over a single neuron
 was created for each value of $dt$, with all other parameters kept equal, and
 those distributions compared to the baseline distribution $N_{dt=0.001}$. The
 comparison of these distributions was performed by measuring the relative
-entropy (Kulbach-Leibler divergence) and Earth Movers' Distance between them.
+entropy (Kullback-Leibler divergence) and Earth Movers' Distance between them.
 These methods of comparing distributions are described and evaluated in TODO
 REF. Increasing the value of $dt$ can be seen to exponentially increase both the
 divergence and distance between these distributions, and as such it is clear
@@ -123,7 +123,7 @@ that minimising the value of $dt$ is optimal. Computationally it is known that
 the error produced from descritization increases by $O(dt)$ for each time
 interval \autocite{brette_simulation_2007}.
 
-Using Kulbach-Leibler divergence and Earth Movers' Distance to compare potential
+Using Kullback-Leibler divergence and Earth Movers' Distance to compare potential
 distributions is not without drawbacks, and these are discussed in further depth
 below.
 

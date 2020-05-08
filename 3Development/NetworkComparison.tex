@@ -22,10 +22,10 @@ between two sequences. Another limitation is derived from its simplicity, as
 spiking patterns tell us little about the membrane potential of a neuron leading
 up to a spike.
 
-\subsection{Kulbach-Leibler Divergence}
+\subsection{Kullback-Leibler Divergence}
 
 Where the Hamming Distance provides a method by which binary spiking trains of a
-neuron can be compared, Kulbach-Leibler (KL) divergence provides a similar
+neuron can be compared, Kullback-Leibler (KL) divergence provides a similar
 method of comparison for the distribution of potential over time between two
 neurons. Comparing potential does have a caveat however: if the total integrated
 sum of potential is different between the two neurons, the KL divergence is not
@@ -53,7 +53,7 @@ being compared.
         \caption{Distant distributions}
         \label{fig:fardist}
     \end{subfigure}
-    \caption[Comparison between Earth Mover Distance and Kulbach-Leibler Divergence]{Comparison between Earth Movers' Distance and Kulbach-Leibler Divergence on two pairs of distributions with the same integral (area). The closeness of the distributions is reflected in a lower EMD while KL divergence remains the same. EMD is therefore a more intuitive metric to compare distributions.}
+    \caption[Comparison between Earth Mover Distance and Kullback-Leibler Divergence]{Comparison between Earth Movers' Distance and Kullback-Leibler Divergence on two pairs of distributions with the same integral (area). The closeness of the distributions is reflected in a lower EMD while KL divergence remains the same. EMD is therefore a more intuitive metric to compare distributions.}
     \label{fig:distributioncompKLEMD}
 \end{figure}
 
@@ -64,7 +64,7 @@ given two different mounds of earth, the amount of earth that would need to be
 moved from one to the other such that both mounds are the same. More formally,
 given two distributions in N-dimensional space $P, Q$, the Earth Mover's
 Distance is the N-dimensional distance between them \autocite{pele_fast_2009}. While more computationally
-expensive to calculate than Kulbach-Leibler divergence, EMD is symmetric, and
+expensive to calculate than Kullback-Leibler divergence, EMD is symmetric, and
 more importantly, is aware of relative space between data-points when comparing
 distributions. This comparison is shown in figure
 \ref{fig:distributioncompKLEMD}, where a change in distribution distance between

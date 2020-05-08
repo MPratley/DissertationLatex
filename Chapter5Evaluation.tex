@@ -1,4 +1,21 @@
-\chapter{Analysis and Evaluation}
+
+% \section{The effect of network size on weighting errors between spiking neurons}
+% - Explanation of Experiment
+% - Graph
+% - Summary of Graph
+
+\chapter{Results, Analysis and Evaluation}
+
+\section{Testing The Simulation}
+
+\subsection{The effect of Gaussian error on weights between spiking neurons}
+- Explanation of Experiment
+- Graph
+- Summary of Graph
+\subsection{The effect of STDP on weighting errors between spiking neurons}
+- Explanation of Experiment
+- Graph
+- Summary of Graph
 
 \section{What do the results mean?}
 
@@ -6,23 +23,25 @@
 
 - Would have been good to investigate the effect of inhibitory synapses.
 
-- When calculating the difference between spiking distributions, the area under the curve, the total accumulated potential, should have been the same to ensure the results were comparable with both Kulbach-Leibler and Earth Movers Distance. Due to the nature of the spiking pattern of the neurons, this was not possible to guarantee, and instead error bars were shown where appropriate. However it would have been preferable, time allowing, to collect multiple results with the same network sizes and mean weighting error, to calculate mean simulation error.
+- When calculating the difference between spiking distributions, the area under the curve, the total accumulated potential, should have been the same to ensure the results were comparable with both Kullback-Leibler and Earth Movers Distance. Due to the nature of the spiking pattern of the neurons, this was not possible to guarantee, and instead error bars were shown where appropriate. However it would have been preferable, time allowing, to collect multiple results with the same network sizes and mean weighting error, to calculate mean simulation error.
 
 \section{Reflection on development methodology}
 
- - Reactive approach, the requirements of the software adapting as the results
- of experiments take shape.
+- Reactive approach, the requirements of the software adapting as the results
+of experiments take shape.
 
- - This is substantially different my original plan of identifying hard
+- This is substantially different my original plan of identifying hard
+requirements of the system and implementing.
  requirements of the system and implementing. 
+requirements of the system and implementing.
 
- - It's much easier to let loose requirements set the direction of travel and
- let experiments along the way determine the end result of the software.
+- It's much easier to let loose requirements set the direction of travel and
+let experiments along the way determine the end result of the software.
 
- - This is partially due to an initial lack of knowledge around the problem
- domain. As I understood more about computational neuroscience, domains that
- seemed simple took on additional complexity, while previously intractable
- concepts became apparent.
+- This is partially due to an initial lack of knowledge around the problem
+domain. As I understood more about computational neuroscience, domains that
+seemed simple took on additional complexity, while previously intractable
+concepts became apparent.
 
 - Another benefit of taking an experimental and incremental approach to the
 development of the project is that tasks naturally break down into small and
@@ -33,18 +52,18 @@ solve a set purpose.
 system design or consistent architecture. When defining and writing new
 data experiments, the flexibility of decoupled components is ideal, but new code
 tends to be purpose built and highly coupled. This would sometimes mean
-re-writing code several times as previously finished code had new requirements. 
+re-writing code several times as previously finished code had new requirements.
 
 - In general, Conclusions, I’ve found that getting development methodology
 “right” is both hard and sort of a misnomer. It depends on the product, the
 team, their locations and the workload: what “right” means will change as your
 product changes and you move from an experimental development cycle to one with
 well formed requirements. One solid way of working throughout a project will
-cause friction later down the line. 
+cause friction later down the line.
 
 A lot of time an effort both inside and out of the software development industry
 is spent defining `Agile ways of working' \autocite{spolsky_you_2006}, however, from my experiences on this
-project, it is better to be flexible and reject workflow rigidity. 
+project, it is better to be flexible and reject workflow rigidity.
 
 Flexibility in ways of working does have its drawbacks however; deadlines must
 be set and adhered to throughout a project lest one finds themselves overworked
@@ -58,12 +77,6 @@ wise to re-scope the project as soon as it was clearly the best course of action
 instead of carrying a metaphorical weight that it was clear couldn't reach the
 finish line.
 
-\section{Personal reflection of result success/lack thereof}
-
-\section{Personal reflection of whole project experience}
- - Certain concepts were intractable for quite some time 
- - concepts that I considered understood made little sense when the time came to
- develop on them 
 
 \section{Ethical considerations for brain simulation}
 

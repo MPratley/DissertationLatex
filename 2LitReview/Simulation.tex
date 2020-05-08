@@ -68,8 +68,12 @@ in the pool nearly halves the time taken to simulate, as shown in figure
 \begin{figure}[h!]
     \centering
     \includegraphics{figures/graphs/coresVERTEX.png}
-    \DoubleCaption{Impact of parallel computation on
-        simulation performance in VERTEX} {\small{Reproduced from \cite{tomsett_virtual_2015}}}
+    \caption[Impact of parallel computation on
+        simulation performance in VERTEX] {Impact of parallel computation on
+        simulation performance in VERTEX. Doubling the number of cores available
+        for computation roughly halves the time taken to setup and run the
+        simulation. Smaller models benefit less as fewer tasks can be
+        independently shared across cores. \small{Reproduced from \cite{tomsett_virtual_2015}}}
     \label{VERTEXparallel}
 \end{figure}
 \vspace{1ex}

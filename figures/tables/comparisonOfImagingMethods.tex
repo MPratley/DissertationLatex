@@ -5,18 +5,26 @@
     \addtolength{\leftskip} {-0.5cm}
     \addtolength{\rightskip}{-0.5cm}
     \begin{tabular}{@{}lllll@{}}
-        Method              &Environment& Resolution                 & Time       &
-        Error(approx.)                                                       \\
+        Method              & Environment & Resolution ($\mu m$ )                & Time       &
+        Error (approx. \%)                                                                \\
         \hline
-        MRI                 &In Vivo& 6$\mu m$                   & 30 minutes & 95\% \\
-        MRI microscopy      &In Vitro& 3$\mu m$                   & -          & 85\% \\
-        XRay microscopy     &In Vitro& 30nm                       & -          & 30\% \\
-        Electron microscopy &In Vitro& \textasciitilde 30nm-0.1nm & > 3 months & <1\% \\
-        Theoretical Ideal   &Either& <5nm                       & <500s      & <1\% \\
+        MRI                 & In Vivo     & 6                  & 30 minutes &
+        95                                                                          \\
+        MRI microscopy      & In Vitro    & 3                   & -          &
+        85                                                                          \\
+        XRay microscopy     & In Vitro    & 0.03                       & -          &
+        30                                                                          \\
+        Electron microscopy & In Vitro    & \textasciitilde 0.03-0.001 & > 3 months &
+        <1                                                                          \\
+        Theoretical Ideal   & Either      & <0.005                       & <500s
+        & <1
+        \\
         \hline
     \end{tabular}
-    \DoubleCaption{Comparison of imaging methods over the whole human brain.}{Error approximated from size
-        of dendritic spines, TODO CITE}
+    \caption[Table comparing brain imaging methods.]{Table comparing brain
+    imaging methods. Time taken and error is extrapolated over the whole human
+    brain. Error is approximated from size of dendritic spines. Data primarily
+    sourced from \autocite{bostrom_whole_2008, kaynig_large-scale_2015}}
     \label{imagemethodcomparison1}
 \end{table}
 \setlength{\tabcolsep}{1ex}

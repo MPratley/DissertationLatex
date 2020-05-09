@@ -8,16 +8,56 @@
 
 \section{Testing The Simulation}
 
-\subsection{The effect of Gaussian error on weights between spiking neurons}
-- Explanation of Experiment
-- Graph
-- Summary of Graph
-\subsection{The effect of STDP on weighting errors between spiking neurons}
-- Explanation of Experiment
-- Graph
-- Summary of Graph
+Simulation testing was performed experimentally, where observed results were
+compared to expected results for any given piece of simulation functionality. In
+a project with a larger dedicated pool of resources, 
+a more robust testing strategy could have involved co-simulating, where the
+network simulation is run alongside a mathematical abstraction that holds
+assertions on states in the network and alerts the user when those assertions
+are broken.
 
-\section{What do the results mean?}
+\subsection{Example of a simple spiking network}
+As seen in the first example topology in the previous chapter, figure
+\ref{fig:top1}, the simplest arrangement of neurons is a single synapse with a
+pre and post synaptic neuron. The membrane potentials of the simulation of such
+an arrangement can be seen in figure \ref{fig:PRERES1}
+\begin{figure}[h!]
+    \centering
+    % \addtolength{\leftskip} {-4cm}
+    % \addtolength{\rightskip}{-4cm}
+    % \includegraphics[width=0.06\linewidth]{figures/tops/topexamrestwo.png}\vspace{-3ex}
+    \includegraphics[width=0.7\linewidth]{figures/graphs/DelayBugFixed.png}
+    \caption[A simple two-neuron network]{A simple two-neuron network. The input neuron (blue) fires under a constant input current. The second neuron (orange) is synaptically linked, and the synapse has a arbitrary delay of 5ms.}
+    \label{fig:PRERES1}
+\end{figure}
+\subsection{The effect of Gaussian error on weights between spiking neurons}
+\begin{figure}[h!]
+    \centering
+    \addtolength{\leftskip} {-4cm}
+    \addtolength{\rightskip}{-4cm}
+    \includegraphics[width=0.7\linewidth]{figures/graphs/RESULT1.eps}
+    \caption[Workflow of project simulation]{A schematic that describes the intended workflow for preforming experiments with the simulation tooling that this chapter describes. Cloned simulations can be modified and continue to run in the same manner as their ancestor simulation.}
+    \label{fig:RES1}
+\end{figure}
+- Explanation of Experiment 1
+- Graph
+- Summary of Graph
+\FloatBarrier
+\subsection{The effect of STDP on weighting errors between spiking neurons}
+\begin{figure}[h!]
+    \centering
+    \addtolength{\leftskip} {-4cm}
+    \addtolength{\rightskip}{-4cm}
+    \includegraphics[width=1.6\linewidth]{figures/graphs/RESULT2.eps}
+    \caption[Workflow of project simulation]{A schematic that describes the intended workflow for preforming experiments with the simulation tooling that this chapter describes. Cloned simulations can be modified and continue to run in the same manner as their ancestor simulation.}
+    \label{fig:RES2}
+\end{figure}
+- Explanation of Experiment2
+- Graph
+- Summary of Graph
+\FloatBarrier
+
+\section{Result evaluation}
 
 \section{Are they successful? Are they expected?}
 
@@ -87,8 +127,9 @@ strategies", Nick Bostrom argues that \ldots
 
 \subsection{Pain and suffering in brain simulation}
 
-\autocite{dan_preventing_2019}
-
+\autocite{faggella_preventing_2019}
+\autocite{singler_existential_2019}
+ 
 \subsection{The rights of a simulation}
 
 \subsection{Kinder artificial intelligence}

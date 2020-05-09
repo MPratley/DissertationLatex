@@ -29,10 +29,10 @@ neuron's membrane potential in orange.
     \label{fig:PRERES1}
 \end{figure}
 \FloatBarrier
-
-In order to meet the requirement set out previously for the availability of
-noisy inputs, the input current of the pre-synaptic neuron can be drawn from a
-random distribution, as shown in figure \ref{fig:PRERES2}. 
+% TODO chapter link
+In order to meet the requirement set out previously in chapter 3 for the
+availability of noisy inputs, the input current of the pre-synaptic neuron can
+be drawn from a random distribution, as shown in figure \ref{fig:PRERES2}. 
 
 \begin{figure}[h!]
     \centering
@@ -40,28 +40,25 @@ random distribution, as shown in figure \ref{fig:PRERES2}.
     % \addtolength{\rightskip}{-4cm}
     % \includegraphics[width=0.06\linewidth]{figures/tops/topexamrestwo.png}\vspace{-3ex}
     \includegraphics[width=0.65\linewidth]{figures/graphs/twospikingneuronsdelaynoise.eps}
-    \caption[A simple two-neuron network with noise]{A simple two-neuron network, with a noisy input. The input current to the pre-synaptic neuron (blue) is drawn from a normal distribution, so the average time between spikes is the same as \ref{fig:PRERES1} overall.}
+    \caption[A simple two-neuron network with noise]{A simple two-neuron network, with a noisy input. The input current to the pre-synaptic neuron (blue) is drawn from a normal distribution, so the average time between spikes is the same as \ref{fig:PRERES1} overall. The spiking pattern of the post-synaptic neuron (orange) is irregular.}
     \label{fig:PRERES2}
 \end{figure}
 \FloatBarrier
 
-\subsection{The effect of Gaussian error on weights between spiking neurons}
+\subsection{The effect of Gaussian error in synapse weights on distance in simulation}
 
 In order to emulate "measurement error" with respect to imaging, I have chosen
 to apply a Gaussian error to all of the synaptic weights in a network. This was
-achieved by specifying a desired average error as a percentage, so for a weight
-$W$ , $W_{err} \sim \cal{N}(W,\sigma)$, where sigma is calculated from the mean
-absolute deviation (MAD) of a normal distribution.
+achieved by specifying a desired average error as a percentage $err$, for a
+weight $W$, where sigma is calculated from the mean absolute deviation (MAD) of
+a normal distribution.
 
-\begin{figure}[h!]
-    \centering
-    \addtolength{\leftskip} {-4cm}
-    \addtolength{\rightskip}{-4cm}
-    \includegraphics[width=0.6\linewidth]{figures/tops/ExperimentLayout.png}
-    \caption[Example Network Setup]{A schematic that maps the connections used for the experiments described in this section. Two \texttt{NeuronGroup} objects act as a set of noisy inputs, which are in turn synaptically linked to a third group, with a probability of connection $p=0.1$. These synapses are randomly weighted. Every neuron in this group is synaptically linked to a single neuron with a potential threshold of infinity, to be used in network comparisons.}
-    \label{fig:RES1TOP}
-\end{figure}
-\FloatBarrier
+\begin{myequation}
+    W_{err} \sim \cal{N}(W,\sigma)
+\end{myequation}
+\begin{myequation}
+    \sigma = \frac{w*{err}}{\sqrt{\frac{2}{\pi}}}
+\end{myequation}
 
 Due to time limitations, the network used for this simulation is not large,
 containing a total of 121 neurons and 1000 synapses. The topology of this
@@ -74,16 +71,14 @@ neurons reduces the number of comparisons to be made, as calculating the EMS of
 two dimensional distributions is exponentially faster than three dimensional
 comparisons. 
 
-
 \begin{figure}[h!]
     \centering
     \addtolength{\leftskip} {-4cm}
     \addtolength{\rightskip}{-4cm}
-    \includegraphics[width=0.8\linewidth]{figures/graphs/RESULT1.eps}
-    \caption[Increase in EMD from inserting error in network synaptic weights]{Change in the Earth Movers' Distance between a baseline simulation and simulations with different levels of error applied to the synaptic weights between neurons.}
-    \label{fig:RES1}
+    \includegraphics[width=0.5\linewidth]{figures/tops/ExperimentLayout.png}
+    \caption[Example Network Setup]{A schematic that maps the connections used for the experiments described in this section. Two \texttt{NeuronGroup} objects act as a set of noisy inputs, which are in turn synaptically linked to a third group, with a probability of connection $p=0.1$. These synapses are randomly weighted. Every neuron in this group is synaptically linked to a single neuron with a potential threshold of infinity, to be used in network comparisons.}
+    \label{fig:RES1TOP}
 \end{figure}
-
 \FloatBarrier
 
 Applying error to the synaptic weights in the network described in figure
@@ -94,11 +89,34 @@ the Gaussian error applied to the synaptic weights doubles the observed distance
 between the potential distributions of the single output neuron. Conversely,
 when STDP is applied to the network, it seems to have a mitigating effect. This
 would suggest that the network has a equilibrium state that it reaches with
-STDP, regardless of the error applied to the weights.
+STDP, regardless of the error applied to the synaptic weights.
 
-\subsection{The effect of STDP on weighting errors between spiking neurons}
+\begin{figure}[h!]
+    \centering
+    \addtolength{\leftskip} {-4cm}
+    \addtolength{\rightskip}{-4cm}
+    \includegraphics[width=0.7\linewidth]{figures/graphs/RESULT1.eps}
+    \caption[Increase in EMD from inserting error in network synaptic weights]{Change in the Earth Mover's Distance between a baseline simulation and simulations with different levels of error applied to the synaptic weights between neurons.}
+    \label{fig:RES1}
+\end{figure}
+\FloatBarrier
 
-TODO explain intent of experiment
+
+\subsection{The divergence over time from Gaussian error in synapse weights}
+
+In order to determine the effect over time of applying gaussian error to all the
+synaptic weights in a network, a network identical to that described in figure
+\ref{fig:RES1TOP} was constructed and simulated with no error, and with 100\%
+mean error. This was repeated with STDP on the weights in the network. 
+
+The results, seen in figure \ref{fig:RES2} display considerable noise
+distortion. However, within the noise distortion the trend demonstrates an
+increase in observed divergence over time, while the divergence appears to
+slightly decrease when simulating with STDP. While the results indicate the
+aforementioned results, the presence of noise in the output of this experiment
+means that this trend is not supported as a conclusive deduction, to the
+exclusion of other interpretations, at least within the $2000ms$ runtime of the
+simulation.
 
 \begin{figure}[h!]
     \centering
@@ -109,8 +127,6 @@ TODO explain intent of experiment
     \label{fig:RES2}
 \end{figure}
 \FloatBarrier
-STDP seems to reduce the intensity of peak deviations, but no discernible pattern either with or without STDP could be identified within the $2000ms$ runtime of the simulation.
-
 
 \section{Result evaluation}
 

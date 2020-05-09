@@ -79,6 +79,12 @@ the equations and implementation of LIF neurons in Chapter 3. % TODO better ref
 
 \subsection{Hebbian learning and synaptic plasticity}
 
-TODO
-
-These concepts are mathematically expanded on in REFERENCE STDP
+In biological networks, neurons adapt their relationships over time in reaction
+to new environments or long term changes, in a process called Hebbian Learning
+\autocite{trappenberg_fundamentals_2009}. This process can be replicated in a
+spiking neural network through adding a vector of weights to each neuron that
+determines the relative connection strength of each pre synaptic input. These
+weights will change over time according to the observed correlation between
+pre-synaptic and post-synaptic spikes, forming Spike-Time Dependent Plasticity
+(STDP) \autocite{iakymchuk_simplified_2015}. The concept and implementation of STDP is expanded on in chapter 3, starting with
+equation \ref{eq:stdpdw}.

@@ -183,7 +183,7 @@ present in equation \ref{eq:presynapticfix}.
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.6\linewidth]{figures/graphs/bugZoomed.eps}
-    \caption[Graph of a bug in the initial implementation of synaptic channels]{A zoomed-in graph, depicting a bug in the initial implementation of synaptic channels that causes the potential over the post-synaptic neuron (orange) to drop suddenly after a pre-synaptic spike (blue), instead of an expected smooth decrease.}
+    \caption[Graph depicting a bug in the initial implementation of synaptic channels]{A zoomed-in graph, depicting a bug in the initial implementation of synaptic channels that causes the potential over the post-synaptic neuron (orange) to drop suddenly after a pre-synaptic spike (blue), instead of an expected smooth decrease.}
     \label{fig:LIFDUALBUG}
 \end{figure}
 
@@ -212,15 +212,8 @@ present in equation \ref{eq:presynapticfix}.
 
 The simulation model described so far has been relatively static once
 constructed; other than changes in membrane potential, neural parameters are not
-changing, nor are the relationships between neurons. However, in biological
-networks, neurons adapt their relationships over time in reaction to new
-environments or long term changes, in a process called Hebbian Learning
-\autocite{trappenberg_fundamentals_2009}. This process can be replicated in a
-spiking neural network through adding a vector of weights to each neuron that
-determines the relative connection strength of each pre synaptic input. These
-weights will change over time according to the observed correlation between
-pre-synaptic and post-synaptic spikes, forming Spike-Time Dependent Plasticity
-(STDP) \autocite{iakymchuk_simplified_2015}.
+changing, nor are the relationships between neurons. To provide this
+relationship it is necessary to implement a form of Hebbian-Learning, such as STDP.
 
 The basic form of STDP is simple; given a synaptic weight between neurons,
 $w_{ij}$, the weight changes at each time interval by $dw$, a function of

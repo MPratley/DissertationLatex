@@ -1,9 +1,3 @@
-
-% \section{The effect of network size on weighting errors between spiking neurons}
-% - Explanation of Experiment
-% - Graph
-% - Summary of Graph
-
 \chapter{Results, Analysis and Evaluation}
 
 \section{Testing The Simulation}
@@ -11,16 +5,20 @@
 Simulation testing was performed experimentally, where observed results were
 compared to expected results for any given piece of simulation functionality. In
 a project with a larger dedicated pool of resources, 
-a more robust testing strategy could have involved co-simulating, where the
-network simulation is run alongside a mathematical abstraction that holds
-assertions on states in the network and alerts the user when those assertions
+a more robust testing strategy could have involved co-simulating; The
+network simulation would be run alongside a mathematical abstraction that holds
+assertions on states in the network, alerting the user when those assertions
 are broken.
 
 \subsection{Example of a simple spiking network}
+
 As seen in the first example topology in the previous chapter, figure
 \ref{fig:top1}, the simplest arrangement of neurons is a single synapse with a
 pre and post synaptic neuron. The membrane potentials of the simulation of such
-an arrangement can be seen in figure \ref{fig:PRERES1}
+an arrangement can be seen in figure \ref{fig:PRERES1}. The exponential decay of
+the synaptic connection can be observed as the "humps" in the post-synaptic
+neuron's membrane potential in orange.
+
 \begin{figure}[h!]
     \centering
     % \addtolength{\leftskip} {-4cm}
@@ -30,40 +28,112 @@ an arrangement can be seen in figure \ref{fig:PRERES1}
     \caption[A simple two-neuron network]{A simple two-neuron network. The input neuron (blue) fires under a constant input current. The second neuron (orange) is synaptically linked, and the synapse has a arbitrary delay of 5ms.}
     \label{fig:PRERES1}
 \end{figure}
+\FloatBarrier
+
+In order to meet the requirement set out previously for the availability of
+noisy inputs, the input current of the pre-synaptic neuron can be drawn from a
+random distribution, as shown in figure \ref{fig:PRERES2}. 
+
+\begin{figure}[h!]
+    \centering
+    % \addtolength{\leftskip} {-4cm}
+    % \addtolength{\rightskip}{-4cm}
+    % \includegraphics[width=0.06\linewidth]{figures/tops/topexamrestwo.png}\vspace{-3ex}
+    \includegraphics[width=0.65\linewidth]{figures/graphs/twospikingneuronsdelaynoise.eps}
+    \caption[A simple two-neuron network with noise]{A simple two-neuron network, with a noisy input. The input current to the pre-synaptic neuron (blue) is drawn from a normal distribution, so the average time between spikes is the same as \ref{fig:PRERES1} overall.}
+    \label{fig:PRERES2}
+\end{figure}
+\FloatBarrier
+
 \subsection{The effect of Gaussian error on weights between spiking neurons}
+
+In order to emulate "measurement error" with respect to imaging, I have chosen
+to apply a Gaussian error to all of the synaptic weights in a network. This was
+achieved by specifying a desired average error as a percentage, so for a weight
+$W$ , $W_{err} \sim \cal{N}(W,\sigma)$, where sigma is calculated from the mean
+absolute deviation (MAD) of a normal distribution.
+
 \begin{figure}[h!]
     \centering
     \addtolength{\leftskip} {-4cm}
     \addtolength{\rightskip}{-4cm}
-    \includegraphics[width=0.7\linewidth]{figures/graphs/RESULT1.eps}
-    \caption[Workflow of project simulation]{A schematic that describes the intended workflow for preforming experiments with the simulation tooling that this chapter describes. Cloned simulations can be modified and continue to run in the same manner as their ancestor simulation.}
+    \includegraphics[width=0.6\linewidth]{figures/tops/ExperimentLayout.png}
+    \caption[Example Network Setup]{A schematic that maps the connections used for the experiments described in this section. Two \texttt{NeuronGroup} objects act as a set of noisy inputs, which are in turn synaptically linked to a third group, with a probability of connection $p=0.1$. These synapses are randomly weighted. Every neuron in this group is synaptically linked to a single neuron with a potential threshold of infinity, to be used in network comparisons.}
+    \label{fig:RES1TOP}
+\end{figure}
+\FloatBarrier
+
+Due to time limitations, the network used for this simulation is not large,
+containing a total of 121 neurons and 1000 synapses. The topology of this
+network is described in figure \ref{fig:RES1TOP}. Two groups of randomly spiking
+neurons with noisy inputs act as the source for a larger "middle" group that is
+the point of observation for these experiments. As the neurons in the larger
+group spike, the changes in potential are recorded in a single post-synaptic
+neuron. The use of a single neuron as a post-synaptic neuron to all the prior
+neurons reduces the number of comparisons to be made, as calculating the EMS of
+two dimensional distributions is exponentially faster than three dimensional
+comparisons. 
+
+
+\begin{figure}[h!]
+    \centering
+    \addtolength{\leftskip} {-4cm}
+    \addtolength{\rightskip}{-4cm}
+    \includegraphics[width=0.8\linewidth]{figures/graphs/RESULT1.eps}
+    \caption[Increase in EMD from inserting error in network synaptic weights]{Change in the Earth Movers' Distance between a baseline simulation and simulations with different levels of error applied to the synaptic weights between neurons.}
     \label{fig:RES1}
 \end{figure}
-- Explanation of Experiment 1
-- Graph
-- Summary of Graph
+
 \FloatBarrier
+
+Applying error to the synaptic weights in the network described in figure
+\ref{fig:RES1TOP}, increases the distance between the membrane potentials, when
+compared to a simulation with no error applied. When applied without STDP, this
+relationship seems to scale linearly, as seen in figure \ref{fig:RES1}; doubling
+the Gaussian error applied to the synaptic weights doubles the observed distance
+between the potential distributions of the single output neuron. Conversely,
+when STDP is applied to the network, it seems to have a mitigating effect. This
+would suggest that the network has a equilibrium state that it reaches with
+STDP, regardless of the error applied to the weights.
+
 \subsection{The effect of STDP on weighting errors between spiking neurons}
+
+TODO explain intent of experiment
+
 \begin{figure}[h!]
     \centering
     \addtolength{\leftskip} {-4cm}
     \addtolength{\rightskip}{-4cm}
     \includegraphics[width=1.6\linewidth]{figures/graphs/RESULT2.eps}
-    \caption[Workflow of project simulation]{A schematic that describes the intended workflow for preforming experiments with the simulation tooling that this chapter describes. Cloned simulations can be modified and continue to run in the same manner as their ancestor simulation.}
+    \caption[KL divergence over time, mean weight error = 95\%]{The Kullback-Leibler divergence over time, where the mean weight error = 95\%.}
     \label{fig:RES2}
 \end{figure}
-- Explanation of Experiment2
-- Graph
-- Summary of Graph
 \FloatBarrier
+STDP seems to reduce the intensity of peak deviations, but no discernible pattern either with or without STDP could be identified within the $2000ms$ runtime of the simulation.
+
 
 \section{Result evaluation}
 
-\section{Are they successful? Are they expected?}
+\subsection{Are they successful? Are they expected?}
+
+Unfortunately I have been unable to form any conclusive data suggesting a link
+between the length of simulation runtime and divergence between simulations with
+and without STDP, as the results in figure \ref{fig:RES2} are too noisy to
+provide meaningful data. I would expect that, over time, Simulations running
+without STDP would diverge more than those with STDP, and future work could
+investigate this link.
 
 - Would have been good to investigate the effect of inhibitory synapses.
 
-- When calculating the difference between spiking distributions, the area under the curve, the total accumulated potential, should have been the same to ensure the results were comparable with both Kullback-Leibler and Earth Movers Distance. Due to the nature of the spiking pattern of the neurons, this was not possible to guarantee, and instead error bars were shown where appropriate. However it would have been preferable, time allowing, to collect multiple results with the same network sizes and mean weighting error, to calculate mean simulation error.
+- When calculating the difference between spiking distributions, the total
+accumulated potential, or the area under
+the curve, should have been the same to ensure
+the results were comparable using both Kullback-Leibler and Earth Movers'
+Distance. Due to the nature of the spiking pattern of the neurons, this was not
+possible to guarantee. However it would have been preferable, time allowing, to
+collect multiple results with the same network sizes and mean weighting error,
+to calculate mean simulation error and show this on the result graphs as the
+mean simulation error.
 
 \section{Reflection on development methodology}
 
@@ -120,12 +190,24 @@ finish line.
 
 \section{Ethical considerations for brain simulation}
 
+The closer that society gets to primitive brain emulation, the more vital it
+will become that that we understand the moral and ethical implications of brain
+emulation such that the non-biological might gain sentience. A fully emulated
+brain, imaged and simulated from its original chemical state, would surely be
+subject to all the same thoughts, processes and emotional states as it did
+pre-simulation. Indeed, if one desires to predict the future brain activity of a
+living being, then it is necessary to leave every facet of the human psyche intact.
 
-In "Taking superintelligence seriously: Superintelligence: Paths, dangers,
-strategies", Nick Bostrom argues that \ldots
-\autocite{bostrom_superintelligence_2014}
+
+% In "Taking superintelligence seriously: Superintelligence: Paths, dangers,
+% strategies", Nick Bostrom argues that \ldots
+% \autocite{bostrom_superintelligence_2014}
 
 \subsection{Pain and suffering in brain simulation}
+
+If one assumes that it is both computationally possible to emulate the human
+brain, and also true that a emulation of emotion is as sentient as humanity,
+then it follows that an emulated brain would be capable of feeling pain. 
 
 \autocite{faggella_preventing_2019}
 \autocite{singler_existential_2019}

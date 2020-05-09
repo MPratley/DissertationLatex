@@ -6,7 +6,7 @@
     \addtolength{\leftskip} {-4cm}
     \addtolength{\rightskip}{-4cm}
     \includegraphics[width=1.3\linewidth]{figures/images/workflow.png}
-    \caption[Workflow of project simulation]{A schematic that describes the intended workflow for preforming experiments with the simulation tooling that this chapter describes. Cloned simulations can be modified and continue to run in the same manner as their ancestor simulation.}
+    \caption[Workflow of the project simulation tooling]{A schematic that describes the intended workflow for preforming experiments with the simulation tooling that this chapter describes. Cloned simulations can be modified and continue to run in the same manner as their ancestor simulation.}
     \label{fig:workflow}
 \end{figure}
 
@@ -60,6 +60,11 @@ flexibility in the precise implementation of neurons. However, abstractions have
 only been provided where necessary, as needless abstraction simply increases
 system complexity and development time \autocite{shaw_abstraction_1984}.
 
+The \texttt{Synapse} object holds the logic that pertains to STDP, and can
+retrieve a list of the most recent spike times from the pre and post-synaptic
+neurons in order to make STDP calculations. Once the weight delta from STDP is
+calculated, the weight is modified and stored in the \texttt{Synapse}.
+
 \FloatBarrier
 
 \subsection{Network Topology}
@@ -75,18 +80,18 @@ and the features that need to be supported by the synapses in such topologies.
     \begin{subfigure}{1\textwidth}
         \centering
         \includegraphics[width=0.35\linewidth]{figures/tops/top1.png}
-        \caption{Neurons are connected in series, each neuron has 1 or fewer inputs}
+        \caption{Neurons are connected in series, where each neuron has a single input}
         \label{fig:top1}
     \end{subfigure} \vspace{1ex} \\ 
-    \begin{subfigure}{.5\textwidth}
+    \begin{subfigure}{1\textwidth}
         \centering
-        \includegraphics[width=0.7\linewidth]{figures/tops/top2.png}
+        \includegraphics[width=0.35\linewidth]{figures/tops/top2.png}
         \caption{Neurons may have multiple synaptic inputs}
         \label{fig:top2}
-    \end{subfigure}
-    \begin{subfigure}{.5\textwidth}
+    \end{subfigure} \vspace{1ex} \\
+    \begin{subfigure}{1\textwidth}
         \centering
-        \includegraphics[width=0.7\linewidth]{figures/tops/top3.png}
+        \includegraphics[width=0.35\linewidth]{figures/tops/top3.png}
         \caption{Multiple synapses may share a pre-synaptic neuron. "Recursive" feedback loops are found in the network.}
         \label{fig:top3}
     \end{subfigure}
@@ -94,7 +99,17 @@ and the features that need to be supported by the synapses in such topologies.
     \label{fig:tops}
 \end{figure}
 
-In figure \ref{fig:tops}, TODO EXPLAIN REQUIREMENTS OF EACH LAYOUT
+A simulation must be able to account for each of the sample topologies in figure
+\ref{fig:tops} and the combinations thereof. The most complicated of these to
+support is the "recursive loop" found in sub-figure \ref{fig:top3}, as without
+placing restrictions on the network, the simulation could deadlock when two
+neurons depend on the other's current potential. The two restrictions that can
+be used are either to restrict the network such that recursive loops are
+detected and prevented, or to provide guarantees that there is a significant
+enough synaptic delay such that the deadlock can't occur. In order to do this, I
+have implemented a runtime detection of recursive loops, so if a neuron that is
+updating it's membrane potential for a time $T$ receives a request to update at
+time $T$, it will throw an exception and end the simulation. 
 
 \subsubsection{Stochastic generation of networks}
 

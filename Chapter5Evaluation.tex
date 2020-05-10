@@ -130,41 +130,30 @@ simulation.
 
 \section{Result evaluation}
 
-Unfortunately I have been unable to form any conclusive data suggesting a link
-between the length of simulation runtime and divergence between simulations with
-and without STDP, as the results in figure \ref{fig:RES2} are too noisy to
-provide meaningful data. I would expect that, over time, Simulations running
-without STDP would diverge more than those with STDP, and future work could
-investigate this link.
+The simulation developed and explained in this dissertation can be adapted to
+show the effects of Gaussian error applied to synaptic weights that is
+correspondent to measurement error produced in the brain imaging process. The
+observed results when this error is applied therefore support the hypothesis
+that measurement error both has an adverse effect on the accuracy of the
+simulation of brain activity, and that this effect can be mitigated through the
+application of synaptic plasticity.
 
-- When calculating the difference between spiking distributions, the total
-accumulated potential, or the area under
-the curve, should have been the same to ensure
-the results were comparable using both Kullback-Leibler and Earth Movers'
-Distance. Due to the nature of the spiking pattern of the neurons, this was not
-possible to guarantee. However it would have been preferable, time allowing, to
-collect multiple results with the same network sizes and mean weighting error,
-to calculate mean simulation error and show this on the result graphs as the
-mean simulation error.
+The mitigation of measurement error through STDP suggests that a neural
+network, simulated or otherwise, with synaptic plasticity should reach an
+equilibrium state where weights change minimally over time, given the the
+spiking pattern of the network remains consistent.
 
-\subsection{Comparison of results to project requirements}
-
-\subsubsection{Analyse and compare three published neural simulation packages.}
-
-\subsubsection{Identify the experiments that should be performed to determine
-      the relation between measurement error in data from imaging a brain, and
-      the performance of a neural simulation of such data.}
-      
-\subsubsection{Identify the requirements and features that the simulation
-      tooling should implement to be capable of performing the project
-      experiments.}
-
-\subsubsection{Identify the parameters in a brain simulation that can be
-      modified during the simulation to emulate the measurement error of
-      uploading the human brain.}
-
-\subsubsection{Analyse the performance of simulations that diverge with
-      different measurement errors from a starting simulation.}
+It is also worth nothing that when calculating the difference between spiking
+distributions the total accumulated potential, or the area under the curve,
+should be the same for both distributions to ensure that the results were
+comparable.This is true for both Kullback-Leibler divergence and Earth Mover's
+Distance. However, due to the nature of the spiking pattern of the neurons, this
+requirement of identical total accumulated potential
+was not possible to guarantee. Future development would include investigations
+to collect multiple comparisons for a given network, with the same measurement
+error but different initial random seeds during simulation runtime. These
+multiple results would provide data from which to calculate mean simulation
+error, to be superimposed across result graphs.
 
 
 \section{Reflection on development methodology}
@@ -193,15 +182,13 @@ This would sometimes mean re-writing code several times as previously finished
 code had new requirements.
 
 By way of conclusion regarding development methodology, I’ve found that getting
-development methodology“right” is both hard and a misnomer of sorts. It depends
-on the project, the team if you have one, and the workload: what “right”means
+development methodology right is both hard and a misnomer of sorts. It depends
+on the project, the team if you have one, and the workload: what “right” means
 will change as the code-base and requirements change. As these mature, it
 development moves from an experimental development cycle to one with well formed
 requirements. As such, one solid way of working throughout a project will cause
 friction later on, while flexibility to change how software is developed as it
-evolves will improve the developer experience immensely.
-
-A lot of time an effort both inside and out of the software development industry
+evolves will improve the developer experience immensely. A lot of time an effort both inside and out of the software development industry
 is spent defining `Agile ways of working' \autocite{spolsky_you_2006}, however,
 from my experiences on this project, it is better to be flexible and reject
 workflow rigidity.
@@ -219,38 +206,86 @@ workflow rigidity.
 % finish line.
 
 
-\section{Ethical considerations for brain simulation}
+\chapter{Ethical considerations for brain simulation}
+
+In "Taking superintelligence seriously: Superintelligence: Paths, dangers,
+strategies", Nick Bostrom argues that while the desirability of enhancing human
+capacities, such as potential gains in life-span, cognition, and emotional
+intelligence may be enticing, pursuit of this goal is not without danger.
+\autocite{bostrom_superintelligence_2014}
 
 The closer that society gets to primitive brain emulation, the more vital it
 will become that that we understand the moral and ethical implications of brain
-emulation such that the non-biological might gain sentience. A fully emulated
+emulation, such that the non-biological might gain sentience. A fully emulated
 brain, imaged and simulated from its original chemical state, would surely be
 subject to all the same thoughts, processes and emotional states as it did
 pre-simulation. Indeed, if one desires to predict the future brain activity of a
-living being, then it is necessary to leave every facet of the human psyche intact.
+living being, then it is necessary to leave every facet of the human psyche
+intact. Therefore it is necessary to contemplate pain in a simulation.
 
 
-% In "Taking superintelligence seriously: Superintelligence: Paths, dangers,
-% strategies", Nick Bostrom argues that \ldots
-% \autocite{bostrom_superintelligence_2014}
-
-\subsection{Pain and suffering in brain simulation}
+\section{Pain and suffering in brain simulation}
 
 If one assumes that it is both computationally possible to emulate the human
-brain, and also true that a emulation of emotion is as sentient as humanity,
-then it follows that an emulated brain would be capable of feeling pain. 
+brain, and that true emulated emotion is as valid as human emotion,
+then it follows that an emulated brain would be capable of both feeling and
+understanding pain as we know it. Furthermore, a simulation capable of greater
+cognition and intelligence than a human would also be capable of pain beyond
+human comprehension. With this in mind, it is worth defining the potential
+causes of suffering in brain simulations. According to Ziesche and Yampolskiy,
+these sources of suffering can be defined broadly as:
+\begin{itemize}
+    \itemsep-0.2em
+    \item The transferred human mind intentionally suffers
+    \item The transferred human mind unintentionally suffers
+    \item Suffering occurs as a natural consequence of the actions or
+    environment of the simulated mind
+\end{itemize}
+Adapted from \autocite{ziesche_no_2019-1}.
 
-Singler says that existential despair/joy will be the driving force behind the
-design and production of transhumanist technology.
+The second of these, that the transferred mind may suffer unintentionally, is
+the item of greatest interest to this dissertation. Unintentional suffering
+could occur as a result of misconfiguration in simulation parameters, or error
+produced during the course of mind transfer. 
 
+Assuming that the simulation itself is not a source of pain, error produced when
+transferring the human mind to a simulation could potentially damage the brain's
+connections to the point of the simulation having a different personality, as
+can happen with brain damage today, particularly in children and young
+adolescents \autocite{max_personality_2015}. An intelligent simulation of a
+human would understand that it had been unsuccessfully copied, itself an
+unpleasant and likely traumatising realisation.
 
-\autocite{faggella_preventing_2019}
-\autocite{singler_existential_2019}
+Finally, there is the possibility of an incorrect simulation or mind-transfer
+simply going wrong during simulation, and abnormal brain activity being
+simulated. While this would most likely become random meaningless data, it is
+possible that such an error could effectively emulate a the mind
+experiencing a seizure for as long as the simulation runs. 
  
 \subsection{The rights of a simulation}
 
-\subsection{Kinder artificial intelligence}
-probably could go in conclusion. Cite lesswrong dude.
+In order to prevent unintentional simulation failure causing suffering, failsafe
+mechanisms should be implemented such that simulated activity that is analogous
+to a seizure or other abnormally excessive or synchronous neuronal activity
+would terminate simulation after a timeout. This timeout should not exceed more
+than an order of minutes of simulated time.
+
+Given a simulation that holds limited computational power, where the emulated
+mind is no more cognitively able than a human, it would not be moral to simulate
+such a sentient artificial intelligence with nothing to do, as boredom and
+loneliness can be intensely negative and painful
+\autocite{hawkley_loneliness_2010}. Thus, a simulation should peacefully turn
+off or enter into a sleep-like state when there are no sensory inputs.
+
+An emulation of a human mind should either exist as an original being, where
+imperfections in the mind-uploading process are irrelevant, or as a perfect copy
+of an existing mind, where the artificial intelligence is considered to be the
+continuation of a person. The legal implications of this would be far reaching,
+and are out of the scope of this discussion.
+
+
+% \section{Kinder artificial intelligence}
+% probably could go in conclusion. Cite lesswrong dude.
 % https://wiki.lesswrong.com/wiki/Friendly_artificial_intelligence
 
 % Is a brain simulation alive? 

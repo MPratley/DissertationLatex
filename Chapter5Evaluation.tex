@@ -31,16 +31,17 @@ neuron's membrane potential in orange.
 \FloatBarrier
 % TODO chapter link
 In order to meet the requirement set out previously in chapter 3 for the
-availability of noisy inputs, the input current of the pre-synaptic neuron can
-be drawn from a random distribution, as shown in figure \ref{fig:PRERES2}. 
+availability of noisy inputs in a simulated network, the input current of the
+pre-synaptic neuron can be drawn from a random distribution, as shown in figure
+\ref{fig:PRERES2}. 
 
 \begin{figure}[h!]
     \centering
     % \addtolength{\leftskip} {-4cm}
     % \addtolength{\rightskip}{-4cm}
     % \includegraphics[width=0.06\linewidth]{figures/tops/topexamrestwo.png}\vspace{-3ex}
-    \includegraphics[width=0.65\linewidth]{figures/graphs/twospikingneuronsdelaynoise.eps}
-    \caption[A simple two-neuron network with noise]{A simple two-neuron network, with a noisy input. The input current to the pre-synaptic neuron (blue) is drawn from a normal distribution, so the average time between spikes is the same as \ref{fig:PRERES1} overall. The spiking pattern of the post-synaptic neuron (orange) is irregular.}
+    \includegraphics[width=0.7\linewidth]{figures/graphs/twospikingneuronsdelaynoise.eps}
+    \caption[A simple two-neuron network with noise]{A simple two-neuron network, with a noisy input. The input current to the pre-synaptic neuron (blue) is drawn from a normal distribution, so the average time between spikes is the same as can be observed in \ref{fig:PRERES1} overall. The spiking pattern of the post-synaptic neuron (orange) is irregular.}
     \label{fig:PRERES2}
 \end{figure}
 \FloatBarrier
@@ -75,27 +76,28 @@ comparisons.
     \centering
     \addtolength{\leftskip} {-4cm}
     \addtolength{\rightskip}{-4cm}
-    \includegraphics[width=0.5\linewidth]{figures/tops/ExperimentLayout.png}
+    \includegraphics[width=0.8\linewidth]{figures/tops/ExperimentLayout.png}
     \caption[Example Network Setup]{A schematic that maps the connections used for the experiments described in this section. Two \texttt{NeuronGroup} objects act as a set of noisy inputs, which are in turn synaptically linked to a third group, with a probability of connection $p=0.1$. These synapses are randomly weighted. Every neuron in this group is synaptically linked to a single neuron with a potential threshold of infinity, to be used in network comparisons.}
     \label{fig:RES1TOP}
 \end{figure}
 \FloatBarrier
 
 Applying error to the synaptic weights in the network described in figure
-\ref{fig:RES1TOP}, increases the distance between the membrane potentials, when
-compared to a simulation with no error applied. When applied without STDP, this
-relationship seems to scale linearly, as seen in figure \ref{fig:RES1}; doubling
-the Gaussian error applied to the synaptic weights doubles the observed distance
-between the potential distributions of the single output neuron. Conversely,
-when STDP is applied to the network, it seems to have a mitigating effect. This
-would suggest that the network has a equilibrium state that it reaches with
-STDP, regardless of the error applied to the synaptic weights.
+\ref{fig:RES1TOP}, increases the distance between the membrane potentials as
+measured with Earth Mover's Distance, when compared to a simulation with no
+error applied. When applied without STDP, this relationship seems to scale
+linearly, as seen in figure \ref{fig:RES1}; doubling the Gaussian error applied
+to the synaptic weights doubles the observed distance between the potential
+distributions of the single output neuron. Conversely, when STDP is applied to
+the network, it appears to have a mitigating effect. This would suggest that the
+network has a equilibrium state that it reaches with STDP, regardless of the
+error applied to the synaptic weights.
 
 \begin{figure}[h!]
     \centering
     \addtolength{\leftskip} {-4cm}
     \addtolength{\rightskip}{-4cm}
-    \includegraphics[width=0.7\linewidth]{figures/graphs/RESULT1.eps}
+    \includegraphics[width=0.8\linewidth]{figures/graphs/RESULT1.eps}
     \caption[Increase in EMD from inserting error in network synaptic weights]{Change in the Earth Mover's Distance between a baseline simulation and simulations with different levels of error applied to the synaptic weights between neurons.}
     \label{fig:RES1}
 \end{figure}
@@ -123,7 +125,7 @@ simulation.
     \addtolength{\leftskip} {-4cm}
     \addtolength{\rightskip}{-4cm}
     \includegraphics[width=1.6\linewidth]{figures/graphs/RESULT2.eps}
-    \caption[KL divergence over time, mean weight error = 95\%]{The Kullback-Leibler divergence over time, where the mean weight error = 95\%.}
+    \caption[KL divergence over time, mean weight error = 95\%]{The change in relative entropy over time measured as Kullback-Leibler divergence, where the mean weight error = 95\%. STDP in the simulation correlates to a slight reduction in divergence, however the divergence from millisecond to millisecond also seems to be be noisier with STDP.}
     \label{fig:RES2}
 \end{figure}
 \FloatBarrier
@@ -140,13 +142,12 @@ application of synaptic plasticity.
 
 The mitigation of measurement error through STDP suggests that a neural
 network, simulated or otherwise, with synaptic plasticity should reach an
-equilibrium state where weights change minimally over time, given the the
-spiking pattern of the network remains consistent.
+equilibrium state where weights change minimally over time, given the spiking pattern of the network remains consistent.
 
-It is also worth nothing that when calculating the difference between spiking
+It is also worth noting that when calculating the difference between spiking
 distributions the total accumulated potential, or the area under the curve,
 should be the same for both distributions to ensure that the results were
-comparable.This is true for both Kullback-Leibler divergence and Earth Mover's
+comparable. This is true for both Kullback-Leibler divergence and Earth Mover's
 Distance. However, due to the nature of the spiking pattern of the neurons, this
 requirement of identical total accumulated potential
 was not possible to guarantee. Future development would include investigations
@@ -155,14 +156,36 @@ error but different initial random seeds during simulation runtime. These
 multiple results would provide data from which to calculate mean simulation
 error, to be superimposed across result graphs.
 
+\section{Evaluation of dissertation objectives}
+
+\subsubsection{Analyse and compare three published neural simulation packages.}
+
+
+\subsubsection{Identify the experiments that should be performed to determine
+      the relation between measurement error in data from imaging a brain, and
+      the performance of a neural simulation of such data.}
+
+
+\subsubsection{Identify the requirements and features that the simulation
+      tooling should implement to be capable of performing the project
+      experiments.}
+
+
+\subsubsection{Identify the parameters in a brain simulation that can be
+      modified during the simulation to emulate the measurement error of
+      uploading the human brain.}
+
+
+\subsubsection{Analyse the performance of simulations that diverge with
+      different measurement errors from a starting simulation.}
 
 \section{Reflection on development methodology}
 
 In developing the software involved in this project, I took a reactive approach,
 with the requirements of the software adapting as the results of experiments
-take shape. This is substantially different my original plan of identifying hard
+took shape. This is substantially different my original plan of identifying hard
 requirements of the system and implementing them them all in a more traditional
-"waterfall" development model. I found that it's much easier to let loose requirements set the direction of travel and
+"waterfall" development model. I found that it was much easier to let loose requirements set the direction of travel and
 let experiments along the way determine the end result of the software.
 
 The success of this experimental approach is partially due to an initial lack of
@@ -170,8 +193,8 @@ knowledge around the problem domain. As I understood more about computational
 neuroscience, domains that seemed simple took on additional complexity, while
 previously intractable concepts became apparent. Another benefit of taking an experimental and incremental approach to the
 development of the project is that tasks naturally break down into small and
-meaningful chunks; each new piece of code does the correct amount of work to
-solve a set purpose. Separating code into conceptual chunks in this manner aided
+meaningful sections; each new piece of code does the correct amount of work to
+solve a set purpose. Separating code into conceptual units in this manner aided
 in readability when returning to them later to add or extend features.
 
 The caveat to the experimental software development approach is that it does not
@@ -184,12 +207,13 @@ code had new requirements.
 By way of conclusion regarding development methodology, I’ve found that getting
 development methodology right is both hard and a misnomer of sorts. It depends
 on the project, the team if you have one, and the workload: what “right” means
-will change as the code-base and requirements change. As these mature, it
-development moves from an experimental development cycle to one with well formed
-requirements. As such, one solid way of working throughout a project will cause
-friction later on, while flexibility to change how software is developed as it
-evolves will improve the developer experience immensely. A lot of time an effort both inside and out of the software development industry
-is spent defining `Agile ways of working' \autocite{spolsky_you_2006}, however,
+will change as the code-base and requirements change. As these mature, the
+project development moves from an experimental development cycle to one with
+well formed requirements. As such, one solid way of working throughout a project
+will cause friction later on, while flexibility to change how software is
+developed as it evolves will improve the developer experience immensely. A lot
+of time and effort both inside and out of the software development industry is
+spent defining `Agile ways of working' \autocite{spolsky_you_2006}, however,
 from my experiences on this project, it is better to be flexible and reject
 workflow rigidity.
 
@@ -219,7 +243,7 @@ intelligence may be enticing, pursuit of this goal is not without danger.
 \autocite{bostrom_superintelligence_2014}
 
 The closer that society gets to primitive brain emulation, the more vital it
-will become that that we understand the moral and ethical implications of brain
+will become that we understand the moral and ethical implications of brain
 emulation, such that the non-biological might gain sentience. A fully emulated
 brain, imaged and simulated from its original chemical state, would surely be
 subject to all the same thoughts, processes and emotional states as it did
@@ -249,7 +273,7 @@ these sources of suffering can be defined broadly as:
     \item Suffering occurs as a natural consequence of the actions or
     environment of the simulated mind
 \end{itemize}
-Adapted from \autocite{ziesche_no_2019-1}.
+\autocite{ziesche_no_2019-1}.
 
 The second of these, that the transferred mind may suffer unintentionally, is
 the item of greatest interest to this dissertation. Unintentional suffering

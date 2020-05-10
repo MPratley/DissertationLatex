@@ -95,6 +95,7 @@ and the features that need to be supported by the synapses in such topologies.
         \caption{Multiple synapses may share a pre-synaptic neuron. "Recursive" feedback loops are found in the network.}
         \label{fig:top3}
     \end{subfigure}
+    \vspace{1ex}
     \caption[Sample network topologies for simulation]{Three sample network topologies for simulation. Numbered circles are spiking neurons, while waves mark an abstract input. Arrows between circles are synaptic connections.}
     \label{fig:tops}
 \end{figure}
@@ -108,7 +109,7 @@ be used are either to restrict the network such that recursive loops are
 detected and prevented, or to provide guarantees that there is a significant
 enough synaptic delay such that the deadlock can't occur. In order to do this, I
 have implemented a runtime detection of recursive loops, so if a neuron that is
-updating it's membrane potential for a time $T$ receives a request to update at
+updating its membrane potential for a time $T$ receives a request to update at
 time $T$, it will throw an exception and end the simulation. 
 
 \subsubsection{Stochastic generation of networks}

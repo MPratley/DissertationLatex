@@ -35,12 +35,20 @@ modification of what it means to be human.
 When discussing brain emulation, we envisage the “uploading” of consciousness,
 which in basic terms is the measurement of electrical activity and neural
 connections of a brain, and in theory would retain every mental process, keeping
-them intact. Using current known techniques, this measurement process would
-introduce error in numerous ways; it is perhaps possible that the resolution of
-the scanning equipment is not large enough to capture the distances between
-neurons correctly, or that changes in the network will occur while measurements
-are taken. It is therefore unclear what impact this measurement error would have
-on a simulation of the human brain.
+them intact. Using current known techniques, this imaging and measurement
+process would introduce error in numerous ways, herein referred to as
+"measurement error"; it is perhaps possible that the resolution of the scanning
+equipment is not large enough to capture the distances between neurons
+correctly, or that changes in the network will occur while measurements are
+taken. It is therefore unclear what impact this measurement error would have on
+a simulation of the human brain.
+
+In investigating the effect of measurement error on predicting brain activity in
+a computational model, this dissertation aims to provide a link between the
+theoretical measurement error in transferring the human mind to a simulation,
+and the resulting accuracy of the simulation. This will be achieved through
+comparison between a control simulation with no emulated measurement error and a
+simulation with measurement error. 
 
 \section{Motivation}
 
@@ -50,8 +58,7 @@ feasibility of predicting future brain activity, given the performance of
 current imaging techniques.
 
 The primary outcome of this project will be to provide tooling written in Python
-that is capable of running simulations in a parallel manner across multiple
-threads, that can be modified during runtime to model the effect of measurement
+that is capable of running concurrent simulations in a efficient manner, that can be modified during runtime to model the effect of measurement
 error when `uploading' a brain into a simulation.
 
 \section{Aims and Objectives}

@@ -258,13 +258,17 @@ In a supervised model, the network will process some test inputs with a known
 output state, and the system modifies itself by comparison to this correct
 state. By contrast, in an unsupervised model the system adjusts weights in
 reaction to input data as it arrives, attempting to find a stable equilibrium
-where weights shift minimally with each adjustment [TODO CITE SOMETHING]. As the
+where weights shift minimally with each adjustment. 
+%[TODO CITE SOMETHING]
+As the
 simulation being designed will use probabilistic noisy inputs with no known
 correct network state, an unsupervised weight update model is desirable. In
 order to achieve this, synaptic inputs to a given neuron will need to compete
 such that the increased potentiation across one synapse decreases the influence
 of competing synapses. Without this competitive model, the system is unlikely to
-stabilise [TODO CITE]. This can be achieved by dividing each weight by the sum
+stabilise. 
+%[TODO CITE]
+This can be achieved by dividing each weight by the sum
 of all the weights in the input vector of a given neuron. This is shown in
 equation \ref{eq:competitive}, where $I_j$ is the input current on post synaptic
 neuron $j$, itself the sum of all the weighted and normalised synaptic currents

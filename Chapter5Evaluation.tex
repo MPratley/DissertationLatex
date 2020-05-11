@@ -7,6 +7,7 @@ Sautoy\\
 The Creativity Code}}
 
 \section{Testing the simulation}
+\label{Testingthesimulation}
 
 Simulation testing was performed experimentally, where observed results were
 compared to expected results for any given piece of simulation functionality. In
@@ -52,6 +53,7 @@ from a random distribution, as shown in figure \ref{fig:PRERES2}.
 \FloatBarrier
 
 \subsection{The effect of Gaussian error in synapse weights on distance in simulation}
+\label{TheeffectofGaussianerror}
 
 In order to emulate "measurement error" with respect to imaging, I have chosen
 to apply a Gaussian error to all of the synaptic weights in a network. This was
@@ -216,27 +218,31 @@ workflow rigidity.
 \section{Evaluation of dissertation objectives}
 
 \subsubsection{Analyse and compare three published neural simulation packages.}
-Lit review
+A selection of popular and notable simulation software packages and libraries are evaluated in section \ref{availableneuralsim} in this document. This evaluation was crucial to defining the specifications for this project's software development.
+
+% This objective was met through the research in SECTION 2 through
+% researching games, films and other projects as case studies. Interviews and
+% correspondence with experts in the industry also competed the task.
 
 \subsubsection{Identify the experiments that should be performed to determine
       the relation between measurement error in data from imaging a brain, and
       the performance of a neural simulation of such data.}
-Chapter 3, as part of forming software requirements
+In section \ref{TheeffectofGaussianerror}, the weighting of synapses between neurons was identified as the property of the network that should be modified to order to emulate measurement error. The various methods that can be used to measure simulation performance are outlined in section \ref{Comparingspikingpatternsbetweentwonetworks}.
 
 \subsubsection{Identify the requirements and features that the simulation
       tooling should implement to be capable of performing the project
       experiments.}
-Chapter 3, formed software requirements
+The requirements for the simulation software package described by this dissertation are defined in section \ref{SimulationRequirements}. These requirements were identified through the research outlined in the Literature Review, chapter 2.
 
 \subsubsection{Identify the parameters in a brain simulation that can be
       modified during the simulation to emulate the measurement error of
       uploading the human brain.}
-Chapter 3, noise,synaptic weighting and STDP
+Following the research in the literature review, specifically section \ref{imagingresearch}, the value of the weights on synapses between neurons was identified as an appropriate approximation for measurement error that would occur in imaging the brain. 
 
 \subsubsection{Analyse the performance of simulations that diverge with
       different measurement errors from a starting simulation.}
 
-Earlier in this chapter 
+The differences in performance between diverging simulations that emulate differing levels of measurement error are analysed in \ref{Testingthesimulation}, and future work on this subject could readily expand this investigation to cover further parameters that affect performance.
 
 \chapter{Ethical Considerations for Brain Simulation}
 \setlength{\epigraphwidth}{0.4\textwidth}

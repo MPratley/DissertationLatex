@@ -1,4 +1,4 @@
-\section{Spiking Neural Networks}
+\section{Spiking neural networks}
 
 \begin{quote}
     `The brain computes! This is accepted as a truism by the majority
@@ -54,7 +54,7 @@ across to changes in the Hodgkin–Huxley model, and more complex behaviour
 can be recreated in the model thanks to its basis in the core chemistry of a
 neuron. However, this complexity is not without pitfalls as the computational
 power required to simulate such advanced models is so large,  that it is no
-longer feasible to simulate in within a network.
+longer feasible to simulate it within a network.
 
 \subsection{Faster neuron models for large scale computation}
 
@@ -63,7 +63,7 @@ interactions between individual components of the nervous system, it is
 computationally infeasible to do so on a scale similar to that of a real-world
 system due to the computational complexity of the Hodgkin-Huxley equations.
 Fortunately, as a network becomes larger, the exact mechanisms of its individual
-components can be approximated, and faster activation or threshold functions
+components can be reliably approximated, and faster activation or threshold functions
 that perform similarly to real ones can be substituted.
 
 One such example of a simple model of a spiking neuron is the Leaky Integrate
@@ -81,7 +81,7 @@ the equations and implementation of LIF neurons in section
 \subsection{Hebbian learning and synaptic plasticity}
 
 In biological networks, neurons adapt their relationships over time in reaction
-to new environments or long term changes, in a process called Hebbian Learning
+to new environments or long term changes, in a process called "Hebbian learning"
 \autocite{trappenberg_fundamentals_2009}. This process can be replicated in a
 spiking neural network through adding a vector of weights to each neuron that
 determines the relative connection strength of each pre synaptic input. These

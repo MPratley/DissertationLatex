@@ -114,17 +114,17 @@ The results, seen in figure \ref{fig:RES2} display considerable noise
 distortion. However, within the noise distortion the trend demonstrates an
 increase in observed divergence over time, while the divergence appears to
 slightly decrease when simulating with STDP. While the results indicate the
-aforementioned results, the presence of noise in the output of this experiment
-means that this trend is not supported as a conclusive deduction, to the
-exclusion of other interpretations, at least within the $2000ms$ runtime of the
-simulation.
+aforementioned characteristics, the presence of noise in the output of this
+experiment means that this trend is not supported as a conclusive deduction to
+the exclusion of other interpretations, at least within the $2000ms$ runtime of
+the simulation.
 
 \begin{figure}[h!]
     \centering
     \addtolength{\leftskip} {-4cm}
     \addtolength{\rightskip}{-4cm}
     \includegraphics[width=1.6\linewidth]{figures/graphs/RESULT2.eps}
-    \caption[KL divergence over time, mean weight error = 95\%]{The change in relative entropy over time measured as Kullback-Leibler divergence, where the mean weight error = 95\%. STDP in the simulation correlates to a slight reduction in divergence, however the divergence from millisecond to millisecond also seems to be be noisier with STDP.}
+    \caption[Kullback-Leibler divergence over time]{The change in relative entropy over time measured as Kullback-Leibler divergence, where the mean weight error = 95\%. STDP in the simulation correlates to a slight reduction in divergence, however the divergence from millisecond to millisecond also seems to be be noisier with STDP.}
     \label{fig:RES2}
 \end{figure}
 \FloatBarrier
@@ -155,34 +155,11 @@ error but different initial random seeds during simulation runtime. These
 multiple results would provide data from which to calculate mean simulation
 error, to be superimposed across result graphs.
 
-\section{Evaluation of dissertation objectives}
-
-\subsubsection{Analyse and compare three published neural simulation packages.}
-
-
-\subsubsection{Identify the experiments that should be performed to determine
-      the relation between measurement error in data from imaging a brain, and
-      the performance of a neural simulation of such data.}
-
-
-\subsubsection{Identify the requirements and features that the simulation
-      tooling should implement to be capable of performing the project
-      experiments.}
-
-
-\subsubsection{Identify the parameters in a brain simulation that can be
-      modified during the simulation to emulate the measurement error of
-      uploading the human brain.}
-
-
-\subsubsection{Analyse the performance of simulations that diverge with
-      different measurement errors from a starting simulation.}
-
 \section{Reflection on development methodology}
 
 In developing the software involved in this project, I took a reactive approach,
 with the requirements of the software adapting as the results of experiments
-took shape. This is substantially different my original plan of identifying hard
+took shape. This is substantially different from my original plan of identifying hard
 requirements of the system and implementing them them all in a more traditional
 "waterfall" development model. I found that it was much easier to let loose requirements set the direction of travel and
 let experiments along the way determine the end result of the software.
@@ -228,6 +205,28 @@ workflow rigidity.
 % instead of carrying a metaphorical weight that it was clear couldn't reach the
 % finish line.
 
+\section{Evaluation of dissertation objectives}
+
+\subsubsection{Analyse and compare three published neural simulation packages.}
+
+
+\subsubsection{Identify the experiments that should be performed to determine
+      the relation between measurement error in data from imaging a brain, and
+      the performance of a neural simulation of such data.}
+
+
+\subsubsection{Identify the requirements and features that the simulation
+      tooling should implement to be capable of performing the project
+      experiments.}
+
+
+\subsubsection{Identify the parameters in a brain simulation that can be
+      modified during the simulation to emulate the measurement error of
+      uploading the human brain.}
+
+
+\subsubsection{Analyse the performance of simulations that diverge with
+      different measurement errors from a starting simulation.}
 
 \chapter{Ethical Considerations for Brain Simulation}
 
@@ -293,7 +292,7 @@ simulated. While this would most likely become random meaningless data, it is
 possible that such an error could effectively emulate a the mind
 experiencing a seizure for as long as the simulation runs. 
  
-\subsection{The rights of a simulation}
+\section{The rights of a simulation}
 
 In order to prevent unintentional simulation failure causing suffering, fail-safe
 mechanisms should be implemented such that simulated activity that is analogous

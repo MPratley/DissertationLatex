@@ -9,7 +9,7 @@ occur as a response to changes in this state \autocite{brette_simulation_2007}.
 In the following section I will define and justify the behaviour of these
 neurons.
 
-\subsection{Leaky Integrate and Fire}
+\subsection{LIF neuron}
 
 The simplest approximation of a spiking neuron that retains the chemical
 behaviour of a biological action potential are Leaky Integrate and Fire (LIF)
@@ -116,7 +116,7 @@ produce this, a distribution $N_{dt}$ of the potential $Vm$ over a single neuron
 was created for each value of $dt$, with all other parameters kept equal, and
 those distributions compared to the baseline distribution $N_{dt=0.001}$. The
 comparison of these distributions was performed by measuring the relative
-entropy (Kullback-Leibler divergence) and Earth Movers' Distance between them.
+entropy (Kullback-Leibler divergence) and Earth Mover's Distance between them.
 These methods of comparing distributions are described and evaluated in section
 \ref{Comparingspikingpatternsbetweentwonetworks}. Increasing the value of $dt$
 can be seen to exponentially increase both the
@@ -125,7 +125,7 @@ that minimising the value of $dt$ is optimal. Computationally it is known that
 the error produced from descritization increases by $O(dt)$ for each time
 interval \autocite{brette_simulation_2007}.
 
-Using Kullback-Leibler divergence and Earth Movers' Distance to compare potential
+Using Kullback-Leibler divergence and Earth Mover's Distance to compare potential
 distributions is not without drawbacks, and these are discussed in further depth
 below.
 

@@ -9,7 +9,7 @@
 \section{Comparing spiking patterns between two networks.}
 \label{Comparingspikingpatternsbetweentwonetworks}
 
-\subsection{Hamming Distance}
+\subsection{Hamming distance}
 Due to the descritization of time required in clock based simulation, spikes at
 each neuron are aligned to a "grid" of sorts. Therefore, given two binary
 vectors holding the spiking state of two neurons, $S_{arr}$ and $S^\prime_{arr}$, the bit at a given index $i$ represents
@@ -23,7 +23,7 @@ between two sequences. Another limitation is derived from its simplicity, as
 spiking patterns tell us little about the membrane potential of a neuron leading
 up to a spike.
 
-\subsection{Kullback-Leibler Divergence}
+\subsection{Kullback-Leibler divergence}
 
 Where the Hamming Distance provides a method by which binary spiking trains of a
 neuron can be compared, Kullback-Leibler (KL) divergence provides a similar
@@ -54,7 +54,7 @@ being compared.
         \caption{Distant distributions}
         \label{fig:fardist}
     \end{subfigure}
-    \caption[Comparison between Earth Mover Distance and Kullback-Leibler Divergence]{Comparison between Earth Movers' Distance and Kullback-Leibler Divergence on two pairs of distributions with the same integral (area). The closeness of the distributions is reflected in a lower EMD while KL divergence remains the same. EMD is therefore a more intuitive metric to compare distributions.}
+    \caption[Comparison between Earth Mover Distance and Kullback-Leibler Divergence]{Comparison between Earth Mover's Distance and Kullback-Leibler Divergence on two pairs of distributions with the same integral (area). The closeness of the distributions is reflected in a lower EMD while KL divergence remains the same. EMD is therefore a more intuitive metric to compare distributions.}
     \label{fig:distributioncompKLEMD}
 \end{figure}
 
